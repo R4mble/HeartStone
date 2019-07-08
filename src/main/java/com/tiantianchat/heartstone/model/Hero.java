@@ -7,7 +7,7 @@ import com.tiantianchat.heartstone.minion.Character;
  * @author Ramble
  */
 @Data
-public class Hero extends Character{
+public class Hero extends Character {
 
     // 护甲
     private int armor = 0;
