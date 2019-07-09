@@ -2,6 +2,7 @@ package com.tiantianchat.heartstone;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tiantianchat.heartstone.minion.Minion;
 import com.tiantianchat.heartstone.model.Hero;
 import com.tiantianchat.heartstone.skill.Skill;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 public class Main {
 
     private static List<Hero> heroBox = new ArrayList<>();
+    private static List<Minion> minionBox = new ArrayList<>();
     private static ObjectMapper mapper = new ObjectMapper();
 
     private static String DIR = "C:\\Users\\Ramble\\Desktop\\tiantianchat";
@@ -37,6 +39,23 @@ public class Main {
 
             heroBox.add(h);
         }
+
+
+        File minionJsonFile = new File(DIR + PATH + "minion.json");
+        List minionList = mapper.readValue(minionJsonFile, List.class);
+
+        for (Object o : minionList) {
+            Minion m = new Minion();
+            Map o1 = (Map) o;
+
+            m.setName(o1.get("name").toString());
+            m.setChineseName(o1.get("chineseName").toString());
+            m.setAttack(Integer.parseInt(o1.get("attack").toString()));
+            m.setBlood(Integer.parseInt(o1.get("blood").toString()));
+
+            minionBox.add(m);
+        }
+
     }
 
     public static void main(String[] args) throws IOException {
