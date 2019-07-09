@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Paladin",
+    "chineseName": "圣骑士",
+    "skill": "geneReporter"
+  },
+  {
+    "name": "Warrior",
+    "chineseName": "战士",
+    "skill": "add2Armor"
+  }
+]

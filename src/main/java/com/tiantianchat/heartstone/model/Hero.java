@@ -15,7 +15,9 @@ public class Hero extends Character {
     // 水晶
     private int crystal;
 
-    Skill skill;
+
+    private String skill;
+
     Scene scene = new Scene();
 
     public Hero() {

@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class Character {
     private String name;
+    private String chineseName;
     private int attack;
     private int blood;
 }
