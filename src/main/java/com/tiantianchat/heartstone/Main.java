@@ -17,20 +17,20 @@ import java.util.Map;
  */
 public class Main {
 
-    private static List<Hero> heroBox;
+    private static List<Hero> heroBox = new ArrayList<>();
+    private static ObjectMapper mapper = new ObjectMapper();
 
     private static String DIR = "C:\\Users\\Ramble\\Desktop\\tiantianchat";
-    private static String PATH = "\\src\\main\\java\\com\\tiantianchat\\heartstone\\CardDesc\\hero\\hero.json";
+    private static String PATH = "\\src\\main\\java\\com\\tiantianchat\\heartstone\\CardDesc\\";
 
     public Main() throws IOException {
-        File file = new File(DIR + PATH);
-        ObjectMapper mapper = new ObjectMapper();
-        List heroList = mapper.readValue(file, List.class);
-        heroBox = new ArrayList<>();
+        File heroJsonFile = new File(DIR + PATH + "hero.json");
+        List heroList = mapper.readValue(heroJsonFile, List.class);
 
         for (Object o : heroList) {
             Hero h = new Hero();
             Map o1 = (Map) o;
+
             h.setName(o1.get("name").toString());
             h.setSkill(o1.get("skill").toString());
             h.setChineseName(o1.get("chineseName").toString());

@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Reporter",
+    "chineseName": "报告兵",
+    "skill": "geneReporter",
+    "attack": 1,
+    "blood": 1
+  }
+]

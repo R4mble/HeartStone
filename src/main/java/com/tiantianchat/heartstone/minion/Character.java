@@ -11,4 +11,5 @@ public class Character {
     private String chineseName;
     private int attack;
     private int blood;
+    private String desc;
 }
