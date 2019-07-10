@@ -83,4 +83,22 @@ public class SkillTest {
         assert reporter.getCurBlood() == 1;
     }
 
+    public void testShoot() {
+        Hero hunter = getHero("Hunter");
+        Hero war = getHero("战士");
+
+        war.setCrystal(3);
+        war.invokeSkill();
+
+        hunter.setCrystal(7);
+        hunter.invokeSkill(war);
+        hunter.invokeSkill(war);
+        hunter.invokeSkill(war);
+
+        System.out.println(war.getHealth());
+
+        assert war.getHealth() == -4;
+        assert hunter.getCrystal() == 1;
+    }
+
 }

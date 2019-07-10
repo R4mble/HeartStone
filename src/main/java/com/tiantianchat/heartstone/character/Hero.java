@@ -34,7 +34,7 @@ public class Hero extends Character {
         return this.getCurBlood() + this.getArmor();
     }
 
-    public void invokeSkill() {
+    public void invokeSkill() throws ManaLessException {
         try {
             Skill skill = new Skill();
             Method method = skill.getClass().getMethod(this.skill, Hero.class);
@@ -47,7 +47,7 @@ public class Hero extends Character {
             method.invoke(skill, this);
 
             this.setCrystal(this.getCrystal() - manaCost.value());
-        } catch (Exception e) {
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
         }
     }

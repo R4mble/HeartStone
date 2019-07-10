@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.character.Hero;
 import com.tiantianchat.heartstone.test.SkillTest;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -68,14 +69,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InvocationTargetException, IllegalAccessException {
 
-
-//
-//        paladin.setCrystal(1);
-//        paladin.invokeSkill();
-//        System.out.println(paladin.getScene());
-//        System.out.println(paladin.getCrystal());
-//
-
         new Main();
         SkillTest skillTest = new SkillTest();
         Method[] methods = skillTest.getClass().getDeclaredMethods();
@@ -85,10 +78,14 @@ public class Main {
     }
 
     public static Hero getHero(String heroName) {
-        return heroBox.stream()
-                .filter(p -> p.getName().equals(heroName) || p.getChineseName().equals(heroName))
-                .findFirst()
-                .orElse(null);
+        Hero h = heroBox.stream()
+                    .filter(p -> p.getName().equals(heroName) || p.getChineseName().equals(heroName))
+                    .findFirst()
+                    .orElse(null);
+
+        Hero r = new Hero();
+        BeanUtils.copyProperties(h, r);
+        return r;
     }
 
     public static Minion getMinion(String minionName) {

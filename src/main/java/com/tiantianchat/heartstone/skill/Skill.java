@@ -28,6 +28,11 @@ public class Skill {
     }
 
     @ManaCost(2)
+    public void shoot(Hero hero, Character character) {
+        character.setCurBlood(character.getCurBlood() - 2);
+    }
+
+    @ManaCost(2)
     public void heal(Hero hero, Character character) {
         if (character.getCurBlood() + 2 >= character.getBlood()) {
             character.setCurBlood(character.getBlood());
