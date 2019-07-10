@@ -12,4 +12,6 @@ import java.lang.annotation.*;
 public @interface ManaCost {
 
     int value();
+
+    String desc();
 }

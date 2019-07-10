@@ -22,8 +22,17 @@ public class Scene {
         this.minions.add(minion);
     }
 
+    public boolean exist(String minionName) {
+        return minions.stream()
+                .anyMatch(m -> m.getChineseName().equals(minionName) || m.getName().equals(minionName));
+    }
+
     @Override
     public String toString() {
         return minions.toString();
+    }
+
+    public int size() {
+        return minions.size();
     }
 }

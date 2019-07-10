@@ -17,4 +17,9 @@ public class Character {
     // 当前血量
     private int curBlood;
     private String desc;
+
+    @Override
+    public boolean equals(Object c) {
+        return c instanceof Character && ((Character) c).getName().equals(this.name);
+    }
 }

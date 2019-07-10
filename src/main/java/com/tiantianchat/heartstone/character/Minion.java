@@ -15,4 +15,9 @@ public class Minion extends Character {
     public String toString() {
         return this.getChineseName();
     }
+
+    @Override
+    public boolean equals(Object c) {
+        return c instanceof Minion && ((Minion) c).getName().equals(this.getName());
+    }
 }

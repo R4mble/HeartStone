@@ -1,5 +1,6 @@
 package com.tiantianchat.heartstone.test;
 
+import com.tiantianchat.heartstone.Main;
 import com.tiantianchat.heartstone.character.Hero;
 import static com.tiantianchat.heartstone.Main.getHero;
 import static com.tiantianchat.heartstone.Main.getMinion;
@@ -8,6 +9,9 @@ import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.exception.ManaLessException;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Wangyl
@@ -64,6 +68,21 @@ public class SkillTest {
                     .equals(Arrays.asList(reporter, reporter, reporter, reporter));
     }
 
+    public void testGeneTotem() {
+        Hero paladin = getHero("萨满");
+
+        paladin.setCrystal(8);
+
+        paladin.invokeSkill();
+        paladin.invokeSkill();
+        paladin.invokeSkill();
+        paladin.invokeSkill();
+
+        assert paladin.getCrystal() == 0;
+
+        assert paladin.getScene().size() == 4;
+    }
+
     public void testHeal() {
         Hero mushi = getHero("牧师");
         mushi.setCrystal(6);
@@ -95,10 +114,10 @@ public class SkillTest {
         hunter.invokeSkill(war);
         hunter.invokeSkill(war);
 
-        System.out.println(war.getHealth());
-
-        assert war.getHealth() == -4;
+        assert war.getHealth() == 26;
         assert hunter.getCrystal() == 1;
     }
+
+
 
 }

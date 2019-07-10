@@ -19,7 +19,6 @@ import java.util.Map;
 /**
  * @author Ramble
  */
-@Component
 public class Main {
 
     private static List<Hero> heroBox = new ArrayList<>();
@@ -89,9 +88,13 @@ public class Main {
     }
 
     public static Minion getMinion(String minionName) {
-        return minionBox.stream()
+        Minion m = minionBox.stream()
                 .filter(p -> p.getName().equals(minionName) || p.getChineseName().equals(minionName))
                 .findFirst()
                 .orElse(null);
+
+        Minion r = new Minion();
+        BeanUtils.copyProperties(m, r);
+        return r;
     }
 }

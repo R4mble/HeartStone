@@ -28,6 +28,7 @@ public class Hero extends Character {
 
     public Hero() {
         this.setBlood(30);
+        this.setCurBlood(30);
     }
 
     public int getHealth() {
