@@ -1,29 +1,45 @@
 package com.tiantianchat.heartstone.skill;
 
-import com.tiantianchat.heartstone.minion.Reporter;
-import com.tiantianchat.heartstone.model.Hero;
+import com.tiantianchat.heartstone.Main;
+import com.tiantianchat.heartstone.character.Hero;
 import com.tiantianchat.heartstone.model.Scene;
-import com.tiantianchat.heartstone.minion.Character;
-import com.tiantianchat.heartstone.exception.ManaLessException;
+import com.tiantianchat.heartstone.character.Character;
+
 /**
  * @author Ramble
  */
 public class Skill {
 
-    public static void add2Armor(Hero hero) {
-        if (hero.getCrystal() < 2) 
-            throw new ManaLessException();
-        hero.setCrystal(hero.getCrystal() - 2);
+    @ManaCost(2)
+    public void add2Armor(Hero hero) {
         hero.setArmor(hero.getArmor() + 2);
     }
 
-    public static void geneReporter(Hero hero) {
+    @ManaCost(2)
+    public void geneReporter(Hero hero) {
         Scene scene = hero.getScene();
-        scene.addLast(new Reporter());
+        scene.addLast(Main.getMinion("Reporter"));
         hero.setScene(scene);
     }
 
-    public static void fire(Hero hero, Character character) {
+    @ManaCost(2)
+    public void fire(Hero hero, Character character) {
+        character.setCurBlood(character.getCurBlood() - 1);
+    }
 
+    @ManaCost(2)
+    public void heal(Hero hero, Character character) {
+        if (character.getCurBlood() + 2 >= character.getBlood()) {
+            character.setCurBlood(character.getBlood());
+        } else {
+            character.setCurBlood(character.getCurBlood() + 2);
+        }
+    }
+
+    @ManaCost(2)
+    public void geneTotem(Hero hero) {
+        Scene scene = hero.getScene();
+        scene.addLast(Main.getMinion("Reporter"));
+        hero.setScene(scene);
     }
 }
