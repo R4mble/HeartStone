@@ -1,6 +1,6 @@
 package com.tiantianchat.heartstone.skill;
 
-import com.tiantianchat.heartstone.Main;
+import com.tiantianchat.heartstone.InitGame;
 import com.tiantianchat.heartstone.character.Hero;
 import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.exception.ShamanTotemFullException;
@@ -31,7 +31,7 @@ public class Skill {
     @ManaCost(value = 2, desc = "圣骑士技能")
     public void geneReporter(Hero hero) {
         Scene scene = hero.getScene();
-        scene.addLast(Main.getMinion("Reporter"));
+        scene.addLast(InitGame.getMinion("Reporter"));
         hero.setScene(scene);
     }
 
@@ -61,10 +61,10 @@ public class Skill {
         Scene scene = hero.getScene();
 
         List<Minion> basicTotems = Arrays.asList(
-                Main.getMinion("灼热图腾"),
-                Main.getMinion("法强图腾"),
-                Main.getMinion("治疗图腾"),
-                Main.getMinion("嘲讽图腾")
+                InitGame.getMinion("灼热图腾"),
+                InitGame.getMinion("法强图腾"),
+                InitGame.getMinion("治疗图腾"),
+                InitGame.getMinion("嘲讽图腾")
         );
 
         List<Minion> availableTotems = new ArrayList<>();

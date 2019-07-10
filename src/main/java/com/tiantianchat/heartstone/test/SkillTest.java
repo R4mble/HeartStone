@@ -1,17 +1,13 @@
 package com.tiantianchat.heartstone.test;
 
-import com.tiantianchat.heartstone.Main;
 import com.tiantianchat.heartstone.character.Hero;
-import static com.tiantianchat.heartstone.Main.getHero;
-import static com.tiantianchat.heartstone.Main.getMinion;
+import static com.tiantianchat.heartstone.InitGame.getHero;
+import static com.tiantianchat.heartstone.InitGame.getMinion;
 
 import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.exception.ManaLessException;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author Wangyl

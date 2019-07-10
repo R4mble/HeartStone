@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Reporter",
+    "chineseName": "报告兵",
+    "attack": 1,
+    "blood": 1
+  ,"cost": 1},
+  {
+    "name": "HealTotem",
+    "chineseName": "治疗图腾",
+    "attack": 0,
+    "blood": 2
+  ,"cost": 1},
+  {
+    "name": "SpellPowerTotem",
+    "chineseName": "法强图腾",
+    "attack": 0,
+    "blood": 2
+  ,"cost": 1},
+  {
+    "name": "TauntTotem",
+    "chineseName": "嘲讽图腾",
+    "attack": 0,
+    "blood": 2
+  ,"cost": 1},
+  {
+    "name": "HotTotem",
+    "chineseName": "灼热图腾",
+    "attack": 1,
+    "blood": 1
+  ,"cost": 1},
+  {
+    "name": "FreshwaterCrocodile",
+    "chineseName": "淡水鳄",
+    "attack": 2,
+    "blood": 3
+  ,"cost": 2}
+]

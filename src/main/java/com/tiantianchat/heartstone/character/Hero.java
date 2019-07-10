@@ -1,6 +1,9 @@
 package com.tiantianchat.heartstone.character;
 
 import com.tiantianchat.heartstone.exception.ManaLessException;
+import com.tiantianchat.heartstone.model.Card;
+import com.tiantianchat.heartstone.model.CardLibrary;
+import com.tiantianchat.heartstone.model.HandCard;
 import com.tiantianchat.heartstone.model.Scene;
 import com.tiantianchat.heartstone.skill.ManaCost;
 import com.tiantianchat.heartstone.skill.Skill;
@@ -15,16 +18,33 @@ import java.lang.reflect.Method;
 @Data
 public class Hero extends Character {
 
-    // 护甲
+    /**
+     * 护甲
+     */
     private int armor = 0;
 
-    // 水晶
+    /**
+     * 水晶
+     */
     private int crystal;
 
 
     private String skill;
 
+    /**
+     * 场面
+     */
     Scene scene = new Scene();
+
+    /**
+     * 手牌
+     */
+    HandCard handCard = new HandCard();
+
+    /**
+     * 牌库
+     */
+    CardLibrary cardLibrary = new CardLibrary();
 
     public Hero() {
         this.setBlood(30);
@@ -69,6 +89,21 @@ public class Hero extends Character {
 
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
+        }
+    }
+
+    public void drawCard(int cardNum) {
+        while (cardNum != 0) {
+            Card card = this.cardLibrary.drawCard();
+            handCard.addLast(card);
+            cardNum--;
+        }
+    }
+
+    public void useMinion(Minion minion) {
+        if (this.handCard.exist(minion.getName())) {
+            handCard.remove(minion);
+            scene.addLast(minion);
         }
     }
 }
