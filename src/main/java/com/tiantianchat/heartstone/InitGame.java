@@ -24,12 +24,18 @@ public class InitGame {
     private static String COMDIR = "C:\\Users\\Windows\\Desktop\\HeartStone";
     private static String PATH = "\\src\\main\\resources\\";
 
-    public InitGame() throws IOException {
+    public InitGame() {
 
         DIR = COMDIR;
 
         File heroJsonFile = new File(DIR + PATH + "hero.json");
-        List heroList = mapper.readValue(heroJsonFile, List.class);
+
+        List heroList = new ArrayList();
+        try {
+            heroList = mapper.readValue(heroJsonFile, List.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for (Object o : heroList) {
             Hero h = new Hero();
@@ -44,7 +50,13 @@ public class InitGame {
 
 
         File minionJsonFile = new File(DIR + PATH + "minion.json");
-        List minionList = mapper.readValue(minionJsonFile, List.class);
+
+        List minionList = new ArrayList();
+        try {
+            minionList = mapper.readValue(minionJsonFile, List.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for (Object o : minionList) {
             Minion m = new Minion();

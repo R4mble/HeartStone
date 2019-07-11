@@ -1,10 +1,8 @@
 package com.tiantianchat.heartstone.character;
 
+import com.tiantianchat.heartstone.exception.AttackZeroException;
 import com.tiantianchat.heartstone.exception.ManaLessException;
-import com.tiantianchat.heartstone.model.Card;
-import com.tiantianchat.heartstone.model.CardLibrary;
-import com.tiantianchat.heartstone.model.HandCard;
-import com.tiantianchat.heartstone.model.Scene;
+import com.tiantianchat.heartstone.model.*;
 import com.tiantianchat.heartstone.skill.ManaCost;
 import com.tiantianchat.heartstone.skill.Skill;
 import com.tiantianchat.heartstone.skill.Spell;
@@ -153,6 +151,31 @@ public class Hero extends Character {
         if (this.handCard.exist(minion.getName())) {
             handCard.remove(minion);
             scene.addLast(minion);
+        }
+    }
+
+    public void attack(Character src, Character tar) throws AttackZeroException {
+        if (src.getCurAttack() < 1) {
+            throw new AttackZeroException();
+        }
+
+        src.setCurBlood(src.getCurBlood() - tar.getCurAttack());
+        tar.setCurBlood(tar.getCurBlood() - src.getCurAttack());
+
+        if (src.getCurBlood() < 1) {
+            if (src instanceof Hero) {
+                Battle.over(this);
+            } else {
+                scene.remove((Minion)src);
+            }
+        }
+
+        if (tar.getCurBlood() < 1) {
+            if (tar instanceof Hero) {
+                Battle.over((Hero)tar);
+            } else {
+                Battle.killMinion((Minion)src);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.tiantianchat.heartstone.model;
 
 import com.tiantianchat.heartstone.character.Hero;
+import com.tiantianchat.heartstone.character.Minion;
 import lombok.Data;
 
 /**
@@ -9,11 +10,21 @@ import lombok.Data;
  */
 @Data
 public class Battle {
-    private Hero hero1;
-    private Hero hero2;
+
+    private static Hero[] hero;
+
+    public static void over(Hero hero) {
+
+    }
+
+    public static void killMinion(Minion src) {
+        for (Hero h : hero) {
+            h.getScene().remove(src);
+        }
+    }
 
     public void begin() {
-        hero1.drawCard(4);
-        hero2.drawCard(4);
+        hero[0].drawCard(4);
+        hero[1].drawCard(4);
     }
 }
