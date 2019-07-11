@@ -6,8 +6,12 @@ import static com.tiantianchat.heartstone.InitGame.getMinion;
 
 import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.exception.ManaLessException;
+import com.tiantianchat.heartstone.model.Card;
+import com.tiantianchat.heartstone.model.CardLibrary;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Wangyl
@@ -28,7 +32,7 @@ public class SkillTest {
             assert e instanceof ManaLessException;
         }
 
-        assert mage.getCrystal() == 1;
+        assert mage.getCurCrystal() == 1;
         assert war.getHealth() == 29;
     }
 
@@ -111,7 +115,26 @@ public class SkillTest {
         hunter.invokeSkill(war);
 
         assert war.getHealth() == 26;
-        assert hunter.getCrystal() == 1;
+        assert hunter.getCurCrystal() == 1;
     }
 
+    public void testDrawCard() {
+        Hero shushi = getHero("术士");
+
+        List<Card> cards = new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            cards.add(getMinion("淡水鳄"));
+        }
+
+        shushi.setCurCrystal(3);
+        shushi.setCardLibrary(new CardLibrary(cards));
+
+        shushi.invokeSkill();
+
+        assert shushi.getCurCrystal() == 1;
+        assert shushi.getCurBlood() == 28;
+        assert shushi.getHandCard().size() == 1;
+        assert shushi.getCardLibrary().size() == 29;
+    }
 }

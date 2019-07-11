@@ -54,7 +54,13 @@ public class Skill {
         }
     }
 
-    // todo 术士技能和潜行者技能
+    // todo 潜行者技能
+
+    @ManaCost(value = 2, desc = "术士技能")
+    public void drawCard(Hero hero) {
+        hero.setCurBlood(hero.getCurBlood() - 2);
+        hero.drawCard(1);
+    }
 
     @ManaCost(value = 2, desc = "萨满技能")
     public void geneTotem(Hero hero) {

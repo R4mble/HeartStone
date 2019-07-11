@@ -87,13 +87,13 @@ public class Hero extends Character {
             Method method = skill.getClass().getMethod(this.skill, Hero.class, Character.class);
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
-            if (this.getCrystal() < manaCost.value()) {
+            if (this.getCurCrystal() < manaCost.value()) {
                 throw new ManaLessException();
             }
 
             method.invoke(skill, this, character);
 
-            this.setCrystal(this.getCrystal() - manaCost.value());
+            this.setCurCrystal(this.getCurCrystal() - manaCost.value());
 
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
