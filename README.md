@@ -3,4 +3,7 @@ Game HeartStone.
 
 WIP
 
-set vm options "-ae" to enable assert
+add vm options "-ae" to enable assert
+
+
+

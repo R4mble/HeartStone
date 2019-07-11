@@ -44,7 +44,7 @@ public class SkillTest {
         assert war.getArmor() == 6;
         assert war.getBlood() == 30;
         assert war.getCurBlood() == 30;
-        assert war.getCrystal() == 0;
+        assert war.getCurCrystal() == 0;
     }
 
     public void testGeneReporter() {
@@ -57,7 +57,7 @@ public class SkillTest {
         paladin.invokeSkill();
         paladin.invokeSkill();
 
-        assert paladin.getCrystal() == 0;
+        assert paladin.getCurCrystal() == 0;
 
         Minion reporter = getMinion("Reporter");
         assert paladin.getScene().getMinions()
@@ -74,7 +74,7 @@ public class SkillTest {
         paladin.invokeSkill();
         paladin.invokeSkill();
 
-        assert paladin.getCrystal() == 0;
+        assert paladin.getCurCrystal() == 0;
 
         assert paladin.getScene().size() == 4;
     }
@@ -113,7 +113,5 @@ public class SkillTest {
         assert war.getHealth() == 26;
         assert hunter.getCrystal() == 1;
     }
-
-
 
 }
