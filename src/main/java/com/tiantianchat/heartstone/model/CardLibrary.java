@@ -1,5 +1,6 @@
 package com.tiantianchat.heartstone.model;
 
+import com.tiantianchat.heartstone.InitGame;
 import lombok.Data;
 
 import java.util.Arrays;
@@ -16,6 +17,10 @@ public class CardLibrary {
 
     public CardLibrary(Card... cards) {
         this.cardLibrary = Arrays.asList(cards);
+    }
+
+    public CardLibrary(String... cardName) {
+        cardLibrary = Arrays.asList(Arrays.stream(cardName).map(InitGame::getMinion).toArray());
     }
 
     public CardLibrary(List<Card> cards) {

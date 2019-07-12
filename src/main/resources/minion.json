@@ -1,38 +1,62 @@
 [
   {
-    "name": "Reporter",
-    "chineseName": "报告兵",
-    "attack": 1,
-    "blood": 1
-  ,"cost": 1},
+    "name": "Reporter", "chineseName": "报告兵", "attack": 1, "blood": 1,"cost": 1
+  },
   {
-    "name": "HealTotem",
-    "chineseName": "治疗图腾",
-    "attack": 0,
-    "blood": 2
-  ,"cost": 1},
+    "name": "HealTotem", "chineseName": "治疗图腾", "attack": 0, "blood": 2,"cost": 1
+  },
   {
-    "name": "SpellPowerTotem",
-    "chineseName": "法强图腾",
-    "attack": 0,
-    "blood": 2
-  ,"cost": 1},
+    "name": "SpellPowerTotem", "chineseName": "法强图腾","attack": 0, "blood": 2,"cost": 1
+  },
   {
-    "name": "TauntTotem",
-    "chineseName": "嘲讽图腾",
-    "attack": 0,
-    "blood": 2
-  ,"cost": 1},
+    "name": "TauntTotem", "chineseName": "嘲讽图腾", "attack": 0, "blood": 2,"cost": 1
+  },
   {
-    "name": "HotTotem",
-    "chineseName": "灼热图腾",
-    "attack": 1,
-    "blood": 1
-  ,"cost": 1},
+    "name": "HotTotem", "chineseName": "灼热图腾", "attack": 1, "blood": 1,"cost": 1
+  },
   {
-    "name": "FreshwaterCrocodile",
-    "chineseName": "淡水鳄",
-    "attack": 2,
-    "blood": 3
-  ,"cost": 2}
+    "name": "FreshwaterCrocodile", "chineseName": "淡水鳄", "attack": 2, "blood": 3,"cost": 2
+  },
+  {
+    "name": "Velociraptor", "chineseName": "迅猛龙", "attack": 3, "blood": 2,"cost": 2
+  },
+  {
+    "name": "ElfArcher", "chineseName": "精灵弓箭手", "attack": 1, "blood": 1,"cost": 1
+  },
+  {
+    "name": "WitchDoctor", "chineseName": "巫医", "attack": 2, "blood": 1,"cost": 1
+  },
+  {
+    "name": "GoldshireFootman", "chineseName": "闪金镇步兵", "attack": 1, "blood": 2,"cost": 2
+  },
+  {
+    "name": "NoviceEngineer", "chineseName": "工程师学徒", "attack": 1, "blood": 1,"cost": 2
+  },
+  {
+    "name": "AcidicSwampOoze", "chineseName": "酸性沼泽软泥怪", "attack": 3, "blood": 2,"cost": 2
+  },
+  {
+    "name": "TeamLeader", "chineseName": "团队领袖", "attack": 2, "blood": 2,"cost": 3
+  },
+  {
+    "name": "BrokenSacrifice", "chineseName": "破碎残阳祭祀", "attack": 3, "blood": 2,"cost": 3
+  },
+  {
+    "name": "BrokenSacrifice", "chineseName": "暴风城骑士", "attack": 2, "blood": 5,"cost": 4
+  },
+  {
+    "name": "BrokenSacrifice", "chineseName": "机械幼龙技工", "attack": 2, "blood": 4,"cost": 4
+  },
+  {
+    "name": "BrokenSacrifice", "chineseName": "食人魔法师", "attack": 4, "blood": 4,"cost": 4
+  },
+  {
+    "name": "BrokenSacrifice", "chineseName": "古拉巴什狂暴者", "attack": 2, "blood": 7,"cost": 5
+  },
+  {
+    "name": "BrokenSacrifice", "chineseName": "暗鳞治愈者", "attack": 4, "blood": 5,"cost": 5
+  },
+  {
+    "name": "BrokenSacrifice", "chineseName": "霜狼督军", "attack": 4, "blood": 4,"cost": 5
+  }
 ]

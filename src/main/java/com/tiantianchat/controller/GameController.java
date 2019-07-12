@@ -1,0 +1,20 @@
+package com.tiantianchat.controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author Ramble
+ */
+@RestController
+@RequestMapping("/game")
+public class GameController {
+
+
+    @PostMapping("/begin")
+    public void begin() {
+        
+    }
+
+}
