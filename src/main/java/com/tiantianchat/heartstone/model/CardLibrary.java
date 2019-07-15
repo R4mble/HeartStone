@@ -20,7 +20,7 @@ public class CardLibrary {
     }
 
     public CardLibrary(String... cardName) {
-        cardLibrary = Arrays.asList(Arrays.stream(cardName).map(InitGame::getMinion).toArray());
+//        cardLibrary = Arrays.asList(Arrays.stream(cardName).map(InitGame::getMinion).toArray());
     }
 
     public CardLibrary(List<Card> cards) {

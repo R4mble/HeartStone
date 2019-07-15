@@ -27,7 +27,7 @@
     "name": "WitchDoctor", "chineseName": "巫医", "attack": 2, "blood": 1,"cost": 1
   },
   {
-    "name": "GoldshireFootman", "chineseName": "闪金镇步兵", "attack": 1, "blood": 2,"cost": 2
+    "name": "GoldShireFootman", "chineseName": "闪金镇步兵", "attack": 1, "blood": 2,"cost": 2
   },
   {
     "name": "NoviceEngineer", "chineseName": "工程师学徒", "attack": 1, "blood": 1,"cost": 2
