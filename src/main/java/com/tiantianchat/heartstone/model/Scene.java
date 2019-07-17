@@ -27,7 +27,7 @@ public class Scene {
 
     public boolean exist(String minionName) {
         return minions.stream()
-                .anyMatch(m -> m.getChineseName().equals(minionName) || m.getName().equals(minionName));
+                .anyMatch(m -> m.chineseName.equals(minionName) || m.name.equals(minionName));
     }
 
     @Override

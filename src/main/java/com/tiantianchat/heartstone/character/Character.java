@@ -5,30 +5,29 @@ import lombok.Data;
 /**
  * @author Ramble
  */
-@Data
 public class Character {
-    private String name;
-    private String chineseName;
-    private int attack;
+    public String name;
+    public String chineseName;
+    public int attack;
 
     /**
      * 当前攻击力
      */
-    private int curAttack;
+    public int curAttack;
 
     /**
      * 原始血量
      */
-    private int blood;
+    public int blood;
 
     /**
      * 当前血量
      */
-    private int curBlood;
-    private String desc;
+    public int curBlood;
+    public String desc;
 
     @Override
     public boolean equals(Object c) {
-        return c instanceof Character && ((Character) c).getName().equals(this.name);
+        return c instanceof Character && ((Character) c).name.equals(this.name);
     }
 }

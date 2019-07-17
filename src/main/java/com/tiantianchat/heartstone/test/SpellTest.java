@@ -13,12 +13,12 @@ public class SpellTest {
     public void testLuckyCoin() {
         Hero shaman = getHero("Shaman");
         shaman.castSpell("luckyCoin");
-        assert shaman.getCurCrystal() == 1;
+        assert shaman.curCrystal == 1;
 
         shaman.castSpell("luckyCoin");
         shaman.castSpell("luckyCoin");
         shaman.castSpell("luckyCoin");
 
-        assert shaman.getCurCrystal() == 4;
+        assert shaman.curCrystal == 4;
     }
 }

@@ -12,6 +12,8 @@ import java.util.Map;
 public class Player {
     private Long id;
     private String name;
+    private String email;
+    private String password;
     private Integer goldCoin;
     private Map<String, Integer> heroExperience;
     private Player[] friends;

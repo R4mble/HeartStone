@@ -1,0 +1,3 @@
+jwt:
+  secret: dfslauisdfjadsbyuwebhf
+  sessionTime: 860000

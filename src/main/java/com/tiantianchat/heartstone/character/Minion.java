@@ -15,12 +15,12 @@ public class Minion extends Character implements Card {
 
     @Override
     public String toString() {
-        return this.getChineseName();
+        return this.chineseName;
     }
 
     @Override
     public boolean equals(Object c) {
-        return c instanceof Minion && ((Minion) c).getName().equals(this.getName());
+        return c instanceof Minion && ((Minion) c).name.equals(this.name);
     }
 
 

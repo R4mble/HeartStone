@@ -19,55 +19,55 @@ public class Skill {
 
     @ManaCost(value = 2, desc = "战士技能")
     public void add2Armor(Hero hero) {
-        hero.setArmor(hero.getArmor() + 2);
+        hero.armor = (hero.armor + 2);
     }
 
     @ManaCost(value = 2, desc = "德鲁伊技能")
     public void reshape(Hero hero) {
-        hero.setArmor(hero.getArmor() + 1);
-        hero.setAttack(hero.getAttack() + 1);
+        hero.armor++;
+        hero.attack++;
     }
 
     @ManaCost(value = 2, desc = "圣骑士技能")
     public void geneReporter(Hero hero) {
-        Scene scene = hero.getScene();
+        Scene scene = hero.scene;
         scene.addLast(InitGame.getMinion("Reporter"));
-        hero.setScene(scene);
+        hero.scene = (scene);
     }
 
     @ManaCost(value = 2, desc = "法师技能")
     public void fire(Hero hero, Character character) {
-        character.setCurBlood(character.getCurBlood() - 1);
+        character.curBlood = (character.curBlood - 1);
     }
 
     @ManaCost(value = 2, desc = "猎人技能")
     public void shoot(Hero hero, Character character) {
-        character.setCurBlood(character.getCurBlood() - 2);
+        character.curBlood = (character.curBlood - 2);
     }
 
     @ManaCost(value = 2, desc = "牧师技能")
     public void heal(Hero hero, Character character) {
-        if (character.getCurBlood() + 2 >= character.getBlood()) {
-            character.setCurBlood(character.getBlood());
+        if (character.curBlood + 2 >= character.blood) {
+            character.curBlood = (character.blood);
         } else {
-            character.setCurBlood(character.getCurBlood() + 2);
+            character.curBlood = (character.curBlood + 2);
         }
     }
 
     @ManaCost(value = 2, desc = "潜行者技能")
     public void equipDagger(Hero hero) {
-        hero.setWeapon(InitGame.getWeapon("匕首"));
+        hero.weapon = (InitGame.getWeapon("匕首"));
     }
 
     @ManaCost(value = 2, desc = "术士技能")
     public void drawCard(Hero hero) {
-        hero.setCurBlood(hero.getCurBlood() - 2);
+        hero.curBlood = (hero.curBlood - 2);
         hero.drawCard(1);
     }
 
     @ManaCost(value = 2, desc = "萨满技能")
     public void geneTotem(Hero hero) {
-        Scene scene = hero.getScene();
+        Scene scene = hero.scene;
 
         List<Minion> basicTotems = Arrays.asList(
                 InitGame.getMinion("灼热图腾"),
@@ -78,7 +78,7 @@ public class Skill {
 
         List<Minion> availableTotems = new ArrayList<>();
         basicTotems.forEach(t -> {
-            if (!scene.exist(t.getName())) {
+            if (!scene.exist(t.name)) {
                 availableTotems.add(t);
             }
         });
@@ -90,6 +90,6 @@ public class Skill {
         int randomIndex = new Random().nextInt(availableTotems.size());
 
         scene.addLast(availableTotems.get(randomIndex));
-        hero.setScene(scene);
+        hero.scene = (scene);
     }
 }

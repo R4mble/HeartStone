@@ -37,16 +37,11 @@ public class PlayerController {
 
     @PostMapping("/users")
     public ResponseEntity createUser(@Valid @RequestBody Player user) {
-        boolean res =  userService.createUser(user.getEmail(), user.getUsername(), user.getPassword());
+        boolean res =  userService.createUser(user.getEmail(), user.getPassword(), user.getPassword());
         if (res) {
             return ResponseEntity.ok("注册成功");
         }
         return ResponseEntity.badRequest().body("注册失败");
-    }
-
-    @GetMapping("/")
-    public String hello() {
-        return "hello";
     }
 
     @PostMapping("/users/login")
@@ -57,7 +52,7 @@ public class PlayerController {
 
         Player user = userService.login(nameOrEmail, password);
         request.getSession().setAttribute(WebConstants.LOGIN_SESSION_KEY, user);
-        CommonUtils.setCookie(response, user.getId());
+        CommonUtils.setCookie(response, Math.toIntExact(user.getId()));
         Map<String, Object> map = new HashMap<>(1);
         map.put("user", jwtService.toToken(user));
         return ResponseEntity.ok(map);

@@ -1,5 +1,6 @@
 package com.tiantianchat.service;
 
+import com.tiantianchat.model.Player;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +9,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PlayerService {
+    public boolean createUser(String email, String password, String password1) {
+        return false;
+    }
+
+    public Player login(String nameOrEmail, String password) {
+        return null;
+    }
 }

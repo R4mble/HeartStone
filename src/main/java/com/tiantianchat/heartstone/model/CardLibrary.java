@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class CardLibrary {
     }
 
     public CardLibrary(List<Card> cards) {
+        Collections.shuffle(cards);
         this.cardLibrary = cards;
     }
 

@@ -19,7 +19,7 @@ public class Battle {
 
     public static void killMinion(Minion src) {
         for (Hero h : hero) {
-            h.getScene().remove(src);
+            h.scene.remove(src);
         }
     }
 

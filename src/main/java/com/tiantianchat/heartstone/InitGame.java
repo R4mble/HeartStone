@@ -39,9 +39,9 @@ public class InitGame {
         for (Object o : heroList) {
             Hero h = new Hero();
             Map o1 = (Map) o;
-            h.setName(o1.get("name").toString());
-            h.setSkill(o1.get("skill").toString());
-            h.setChineseName(o1.get("chineseName").toString());
+            h.name = (o1.get("name").toString());
+            h.skill = (o1.get("skill").toString());
+            h.chineseName = (o1.get("chineseName").toString());
             heroBox.add(h);
         }
 
@@ -56,11 +56,11 @@ public class InitGame {
         for (Object o : minionList) {
             Minion m = new Minion();
             Map o1 = (Map) o;
-            m.setName(o1.get("name").toString());
-            m.setChineseName(o1.get("chineseName").toString());
-            m.setAttack(Integer.parseInt(o1.get("attack").toString()));
-            m.setBlood(Integer.parseInt(o1.get("blood").toString()));
-            m.setCurBlood(Integer.parseInt(o1.get("blood").toString()));
+            m.name = (o1.get("name").toString());
+            m.chineseName = (o1.get("chineseName").toString());
+            m.attack = (Integer.parseInt(o1.get("attack").toString()));
+            m.blood = (Integer.parseInt(o1.get("blood").toString()));
+            m.curBlood = (Integer.parseInt(o1.get("blood").toString()));
             minionBox.add(m);
         }
 
@@ -74,28 +74,24 @@ public class InitGame {
         for (Object o : weaponList) {
             Weapon m = new Weapon();
             Map o1 = (Map) o;
-            m.setName(o1.get("name").toString());
-            m.setAttack(Integer.parseInt(o1.get("attack").toString()));
-            m.setDurability(Integer.parseInt(o1.get("durability").toString()));
+            m.name = (o1.get("name").toString());
+            m.attack = (Integer.parseInt(o1.get("attack").toString()));
+            m.durability = (Integer.parseInt(o1.get("durability").toString()));
             weaponBox.add(m);
         }
 
     }
 
     public static Hero getHero(String heroName) {
-        Hero h = heroBox.stream()
-                    .filter(p -> p.getName().equals(heroName) || p.getChineseName().equals(heroName))
+        return heroBox.stream()
+                    .filter(p -> p.name.equals(heroName) || p.chineseName.equals(heroName))
                     .findFirst()
                     .orElse(null);
-
-        Hero r = new Hero();
-        BeanUtils.copyProperties(h, r);
-        return r;
     }
 
     public static Minion getMinion(String minionName) {
         Minion m = minionBox.stream()
-                .filter(p -> p.getName().equals(minionName) || p.getChineseName().equals(minionName))
+                .filter(p -> p.name.equals(minionName) || p.chineseName.equals(minionName))
                 .findFirst()
                 .orElse(null);
 
@@ -106,7 +102,7 @@ public class InitGame {
 
     public static Weapon getWeapon(String weaponName) {
         Weapon m = weaponBox.stream()
-                .filter(p -> p.getName().equals(weaponName))
+                .filter(p -> p.name.equals(weaponName))
                 .findFirst()
                 .orElse(null);
 
@@ -117,7 +113,7 @@ public class InitGame {
 
 //    private <T> T getObject(List<T> box) {
 //        T t = box.stream()
-//                .filter((T)p -> p.getName().equals(minionName))
+//                .filter((T)p -> p.name.equals(minionName))
 //                .findFirst()
 //                .orElse(null);
 //

@@ -7,6 +7,7 @@ import com.tiantianchat.heartstone.skill.ManaCost;
 import com.tiantianchat.heartstone.skill.Skill;
 import com.tiantianchat.heartstone.skill.Spell;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,49 +16,49 @@ import java.lang.reflect.Method;
 /**
  * @author Ramble
  */
-@Data
 public class Hero extends Character {
 
     /**
      * 护甲
      */
-    private int armor = 0;
+    public int armor = 0;
 
     /**
      * 水晶
      */
-    private int crystal;
+    public int crystal;
 
-    private int curCrystal;
+    public int curCrystal;
 
     /**
      * 武器
      */
-    private Weapon weapon;
+    public Weapon weapon;
+
 
     /**
      * 英雄技能
      */
-    private String skill;
+    public String skill;
 
     /**
      * 场面
      */
-    private Scene scene = new Scene();
+    public Scene scene = new Scene();
 
     /**
      * 手牌
      */
-    private HandCard handCard = new HandCard();
+    public HandCard handCard = new HandCard();
 
     /**
      * 牌库
      */
-    private CardLibrary cardLibrary;
+    public CardLibrary cardLibrary;
 
     public Hero() {
-        this.setBlood(30);
-        this.setCurBlood(30);
+        this.blood = 30;
+        this.curBlood = 30;
     }
 
     public void setCrystal(int crystal) {
@@ -66,7 +67,7 @@ public class Hero extends Character {
     }
 
     public int getHealth() {
-        return this.getCurBlood() + this.getArmor();
+        return curBlood + armor;
     }
 
     public void invokeSkill() throws ManaLessException {
@@ -75,13 +76,13 @@ public class Hero extends Character {
             Method method = skill.getClass().getMethod(this.skill, Hero.class);
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
-            if (this.getCurCrystal() < manaCost.value()) {
+            if (curCrystal < manaCost.value()) {
                 throw new ManaLessException();
             }
 
             method.invoke(skill, this);
 
-            this.setCurCrystal(this.getCurCrystal() - manaCost.value());
+            curCrystal = (curCrystal - manaCost.value());
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
         }
@@ -93,13 +94,13 @@ public class Hero extends Character {
             Method method = skill.getClass().getMethod(this.skill, Hero.class, Character.class);
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
-            if (this.getCurCrystal() < manaCost.value()) {
+            if (curCrystal < manaCost.value()) {
                 throw new ManaLessException();
             }
 
             method.invoke(skill, this, character);
 
-            this.setCurCrystal(this.getCurCrystal() - manaCost.value());
+            curCrystal = (curCrystal - manaCost.value());
 
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
@@ -112,13 +113,13 @@ public class Hero extends Character {
             Method method = spell.getClass().getMethod(spellName, Hero.class);
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
-            if (this.getCurCrystal() < manaCost.value()) {
+            if (this.curCrystal < manaCost.value()) {
                 throw new ManaLessException();
             }
 
             method.invoke(spell, this);
 
-            this.setCurCrystal(this.getCurCrystal() - manaCost.value());
+            curCrystal = (curCrystal - manaCost.value());
 
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
@@ -131,13 +132,13 @@ public class Hero extends Character {
             Method method = skill.getClass().getMethod(this.skill, Hero.class, Character.class);
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
-            if (this.getCrystal() < manaCost.value()) {
+            if (curCrystal < manaCost.value()) {
                 throw new ManaLessException();
             }
 
             method.invoke(skill, this, character);
 
-            this.setCrystal(this.getCrystal() - manaCost.value());
+            this.setCrystal(curCrystal - manaCost.value());
 
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
@@ -154,33 +155,33 @@ public class Hero extends Character {
     }
 
     public void useMinion(Minion minion) {
-        if (this.handCard.exist(minion.getName())) {
+        if (this.handCard.exist(minion.name)) {
             handCard.remove(minion);
             scene.addLast(minion);
         }
     }
 
     public void attack(Character src, Character tar) throws AttackZeroException {
-        if (src.getCurAttack() < 1) {
+        if (src.curAttack < 1) {
             throw new AttackZeroException();
         }
 
-        src.setCurBlood(src.getCurBlood() - tar.getCurAttack());
-        tar.setCurBlood(tar.getCurBlood() - src.getCurAttack());
+        src.curBlood = (src.curBlood - tar.curAttack);
+        tar.curBlood = (tar.curBlood - src.curBlood);
 
-        if (src.getCurBlood() < 1) {
+        if (src.curBlood < 1) {
             if (src instanceof Hero) {
                 Battle.over(this);
             } else {
-                scene.remove((Minion)src);
+                scene.remove((Minion) src);
             }
         }
 
-        if (tar.getCurBlood() < 1) {
+        if (tar.curBlood < 1) {
             if (tar instanceof Hero) {
-                Battle.over((Hero)tar);
+                Battle.over((Hero) tar);
             } else {
-                Battle.killMinion((Minion)src);
+                Battle.killMinion((Minion) src);
             }
         }
     }

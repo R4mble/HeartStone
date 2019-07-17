@@ -6,13 +6,12 @@ import lombok.Data;
  * @author Wangyl
  * @date 2019/7/16
  */
-@Data
 public class Weapon {
-    private String name;
-    private int attack;
-    private int curAttack;
-    private int durability;
-    private int curDurability;
+    public String name;
+    public int attack;
+    public int curAttack;
+    public int durability;
+    public int curDurability;
 
     public void setAttack(int attack) {
         this.attack = attack;

@@ -34,7 +34,7 @@ public class HandCard {
         for (Card card : handCards) {
             if (card instanceof Minion) {
                 Minion m = (Minion)card;
-                if (m.getChineseName().equals(minionName) || m.getName().equals(minionName)) {
+                if (m.chineseName.equals(minionName) || m.name.equals(minionName)) {
                     return true;
                 }
             }

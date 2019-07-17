@@ -28,18 +28,18 @@ public class MinionTest {
             cards2.add(getMinion("淡水鳄"));
         }
 
-        shaman.setCardLibrary(new CardLibrary(cards));
-        fashi.setCardLibrary(new CardLibrary(cards2));
+        shaman.cardLibrary = (new CardLibrary(cards));
+        fashi.cardLibrary = (new CardLibrary(cards2));
 
         shaman.drawCard(4);
-        assert shaman.getCardLibrary().size() == 26;
+        assert shaman.cardLibrary.size() == 26;
 
         fashi.drawCard(4);
-        assert fashi.getCardLibrary().size() == 26;
+        assert fashi.cardLibrary.size() == 26;
 
-        fashi.useMinion(fashi.getHandCard().getMinion(0));
-        assert fashi.getHandCard().size() == 3;
-        assert fashi.getScene().size() == 1;
+        fashi.useMinion(fashi.handCard.getMinion(0));
+        assert fashi.handCard.size() == 3;
+        assert fashi.scene.size() == 1;
     }
 
     public void attack() {
