@@ -6,13 +6,16 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Ramble
+ */
 @SpringBootApplication
 @RestController
 @EnableAspectJAutoProxy
-public class ChatApplication {
+public class HeartStoneApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChatApplication.class, args);
+		SpringApplication.run(HeartStoneApplication.class, args);
 	}
 
 	@GetMapping("/")

@@ -1,8 +1,6 @@
 package com.tiantianchat.heartstone.test;
 
 import com.tiantianchat.heartstone.character.Hero;
-import static com.tiantianchat.heartstone.InitGame.getHero;
-import static com.tiantianchat.heartstone.InitGame.getMinion;
 
 import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.exception.ManaLessException;
@@ -12,6 +10,8 @@ import com.tiantianchat.heartstone.model.CardLibrary;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.tiantianchat.heartstone.InitGame.*;
 
 /**
  * @author Wangyl
@@ -142,6 +142,6 @@ public class SkillTest {
         Hero zie = getHero("潜行者");
         zie.setCrystal(3);
         zie.invokeSkill();
-        System.out.println(zie.getWeapon());
+        assert zie.getWeapon().equals(getWeapon("匕首"));
     }
 }

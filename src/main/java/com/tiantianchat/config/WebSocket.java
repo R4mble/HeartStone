@@ -9,7 +9,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+public class WebSocket implements WebSocketMessageBrokerConfigurer {
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();

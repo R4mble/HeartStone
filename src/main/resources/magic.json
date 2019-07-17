@@ -1,0 +1,20 @@
+[
+  {
+    "name": "luckCoin",
+    "chineseName": "幸运币",
+    "cost": 0,
+    "occupation": "All"
+  },
+  {
+    "name": "fireBall",
+    "chineseName": "火球术",
+    "cost": 4,
+    "occupation": "法师"
+  },
+  {
+    "name": "fireBall",
+    "chineseName": "火球术",
+    "cost": 4,
+    "occupation": "法师"
+  }
+]
