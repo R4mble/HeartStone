@@ -42,6 +42,7 @@ public class HandCard {
         return false;
     }
 
+
     public void remove(Card card) {
         this.handCards.remove(card);
     }
