@@ -2,6 +2,7 @@ package com.tiantianchat.heartstone.model;
 
 import com.tiantianchat.heartstone.InitGame;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @date 2019/7/10
  */
 @Data
+@NoArgsConstructor
 public class CardLibrary {
 
     List<Card> cardLibrary;

@@ -54,7 +54,10 @@ public class Skill {
         }
     }
 
-    // todo 潜行者技能
+    @ManaCost(value = 2, desc = "潜行者技能")
+    public void equipDagger(Hero hero) {
+        hero.setWeapon(InitGame.getWeapon("匕首"));
+    }
 
     @ManaCost(value = 2, desc = "术士技能")
     public void drawCard(Hero hero) {

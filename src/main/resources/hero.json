@@ -37,7 +37,7 @@
   {
     "name": "Rogue",
     "chineseName": "潜行者",
-    "skill": "knife"
+    "skill": "equipDagger"
   },
   {
     "name": "Warlock",

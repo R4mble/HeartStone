@@ -1,6 +1,8 @@
 package com.tiantianchat.heartstone.model;
 
 import com.tiantianchat.heartstone.character.Minion;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Min;
 import java.util.ArrayList;

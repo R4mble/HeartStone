@@ -7,6 +7,7 @@ import com.tiantianchat.heartstone.skill.ManaCost;
 import com.tiantianchat.heartstone.skill.Skill;
 import com.tiantianchat.heartstone.skill.Spell;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,6 +31,11 @@ public class Hero extends Character {
     private int curCrystal;
 
     /**
+     * 武器
+     */
+    private Weapon weapon;
+
+    /**
      * 英雄技能
      */
     private String skill;
@@ -37,17 +43,17 @@ public class Hero extends Character {
     /**
      * 场面
      */
-    Scene scene = new Scene();
+    private Scene scene = new Scene();
 
     /**
      * 手牌
      */
-    HandCard handCard = new HandCard();
+    private HandCard handCard = new HandCard();
 
     /**
      * 牌库
      */
-    CardLibrary cardLibrary = new CardLibrary();
+    private CardLibrary cardLibrary;
 
     public Hero() {
         this.setBlood(30);

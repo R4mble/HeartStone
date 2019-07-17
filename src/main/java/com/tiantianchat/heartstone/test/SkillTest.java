@@ -137,4 +137,11 @@ public class SkillTest {
         assert shushi.getHandCard().size() == 1;
         assert shushi.getCardLibrary().size() == 29;
     }
+
+    public void testEquipDagger() {
+        Hero zie = getHero("潜行者");
+        zie.setCrystal(3);
+        zie.invokeSkill();
+        System.out.println(zie.getWeapon());
+    }
 }
