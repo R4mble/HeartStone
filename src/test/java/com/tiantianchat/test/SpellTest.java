@@ -1,4 +1,4 @@
-package com.tiantianchat.heartstone.test;
+package com.tiantianchat.test;
 
 import com.tiantianchat.heartstone.character.Hero;
 

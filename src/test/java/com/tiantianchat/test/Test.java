@@ -1,19 +1,9 @@
-package com.tiantianchat.heartstone.test;
+package com.tiantianchat.test;
 
 import com.tiantianchat.heartstone.InitGame;
-import com.tiantianchat.heartstone.character.Hero;
-import com.tiantianchat.heartstone.model.Card;
-import com.tiantianchat.heartstone.model.CardLibrary;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-import static com.tiantianchat.heartstone.InitGame.getHero;
-import static com.tiantianchat.heartstone.InitGame.getMinion;
 
 /**
  * @author Wangyl

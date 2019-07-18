@@ -4,7 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tiantianchat.heartstone.character.Hero;
 import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.model.Weapon;
-import org.springframework.beans.BeanUtils;
+import com.tiantianchat.repository.MinionRepository;
+import com.tiantianchat.repository.ProfessionRepository;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +22,9 @@ import java.util.Map;
 /**
  * @author Ramble
  */
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class InitGame {
 
     private static List<Hero> heroBox = new ArrayList<>();
@@ -25,26 +35,14 @@ public class InitGame {
     private static String DIR = "C:\\Users\\Ramble\\Desktop\\tiantianchat";
     private static String SHENZHOUDIR = "C:\\Users\\Ramble\\Desktop\\MyGitHub\\HeartStone";
     private static String PATH = "\\src\\main\\resources\\";
+
     public InitGame() {
+    }
+
+    @Before
+    public void InitGame() {
 
         DIR = SHENZHOUDIR;
-
-        File heroJsonFile = new File(DIR + PATH + "hero.json");
-        List heroList = new ArrayList();
-        try {
-            heroList = mapper.readValue(heroJsonFile, List.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for (Object o : heroList) {
-            Hero h = new Hero();
-            Map o1 = (Map) o;
-            h.name = (o1.get("name").toString());
-            h.skill = (o1.get("skill").toString());
-            h.chineseName = (o1.get("chineseName").toString());
-            heroBox.add(h);
-        }
-
 
         File minionJsonFile = new File(DIR + PATH + "minion.json");
         List minionList = new ArrayList();
@@ -81,46 +79,39 @@ public class InitGame {
 
     }
 
-    public static Hero getHero(String heroName) {
-        Hero hero = new Hero();
-        for (Hero h : heroBox) {
-            if (h.name.equals(heroName) || h.chineseName.equals(heroName)) {
-                hero.name = h.name;
-                hero.chineseName = h.chineseName;
-                hero.skill = h.skill;
-            }
+    @Autowired
+    private ProfessionRepository professionRepository;
+
+    @Autowired
+    private MinionRepository minionRepository;
+
+    @Test
+    public void init() {
+        List<com.tiantianchat.model.heartstone.Minion> list = new ArrayList<>();
+
+        for (Minion h : minionBox) {
+            com.tiantianchat.model.heartstone.Minion p = new com.tiantianchat.model.heartstone.Minion();
+            p.setName(h.name);
+            p.setAttack(h.attack);
+            p.setBlood(h.blood);
+            p.setCost(h.cost);
+            list.add(p);
         }
-        return hero;
+
+        minionRepository.saveAll(list);
     }
 
-    public static Minion getMinion(String minionName) {
-        Minion minion = new Minion();
-        for (Minion m : minionBox) {
-            if (m.name.equals(minionName) || m.chineseName.equals(minionName)) {
-                minion.name = m.name;
-                minion.chineseName = m.chineseName;
-                minion.setAttack(m.attack);
-                minion.setBlood(m.blood);
-            }
-        }
-        return minion;
+
+    public static Hero getHero(String a) {
+        return null;
     }
 
-    public static Weapon getWeapon(String weaponName) {
-        return weaponBox.stream()
-                .filter(p -> p.name.equals(weaponName))
-                .findFirst()
-                .orElse(null);
+    public static Minion getMinion(String a) {
+        return null;
     }
 
-    private <T> T getObject(List<T> box) {
-        T t = box.stream()
-                .filter((T)p -> p.name.equals(minionName))
-                .findFirst()
-                .orElse(null);
-
-        Weapon r = new Weapon();
-        BeanUtils.copyProperties(m, r);
-        return r;
+    public static Weapon getWeapon(String a) {
+        return null;
     }
+
 }

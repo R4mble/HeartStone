@@ -1,4 +1,4 @@
-package com.tiantianchat.heartstone.test.temp;
+package com.tiantianchat.test.temp;
 
 /**
  * @author Wangyl

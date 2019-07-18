@@ -1,6 +1,6 @@
 package com.tiantianchat.service;
 
-import com.tiantianchat.model.Player;
+import com.tiantianchat.model.heartstone.Player;
 import org.springframework.stereotype.Service;
 
 /**

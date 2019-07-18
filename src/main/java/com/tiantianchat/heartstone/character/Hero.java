@@ -55,6 +55,7 @@ public class Hero extends Character {
      * 牌库
      */
     public CardLibrary cardLibrary;
+    public String chineseName;
 
     public Hero() {
         this.blood = 30;

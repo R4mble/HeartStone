@@ -1,6 +1,6 @@
 package com.tiantianchat.config;
 
-import com.tiantianchat.model.Player;
+import com.tiantianchat.model.heartstone.Player;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;

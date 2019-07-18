@@ -11,6 +11,7 @@ public class Minion extends Character implements Card {
 
     public Attribute[] attributes;
     public int cost;
+    public String chineseName;
 
     @Override
     public String toString() {
@@ -21,6 +22,5 @@ public class Minion extends Character implements Card {
     public boolean equals(Object c) {
         return c instanceof Minion && ((Minion) c).name.equals(this.name);
     }
-
 
 }

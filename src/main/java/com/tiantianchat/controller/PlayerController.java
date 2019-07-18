@@ -3,7 +3,7 @@ package com.tiantianchat.controller;
 import com.tiantianchat.config.CommonUtils;
 import com.tiantianchat.config.JwtService;
 import com.tiantianchat.config.WebConstants;
-import com.tiantianchat.model.Player;
+import com.tiantianchat.model.heartstone.Player;
 import com.tiantianchat.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

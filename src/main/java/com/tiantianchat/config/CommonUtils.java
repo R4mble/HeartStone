@@ -1,6 +1,6 @@
 package com.tiantianchat.config;
 
-import com.tiantianchat.model.Player;
+import com.tiantianchat.model.heartstone.Player;
 import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.Cookie;
