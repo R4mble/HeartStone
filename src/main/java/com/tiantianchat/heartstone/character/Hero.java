@@ -26,7 +26,7 @@ public class Hero extends Character {
     /**
      * 水晶
      */
-    public int crystal;
+    public int crystal = 0;
 
     public int curCrystal;
 
@@ -59,6 +59,12 @@ public class Hero extends Character {
     public Hero() {
         this.blood = 30;
         this.curBlood = 30;
+    }
+
+    public Hero(Hero hero) {
+        skill = hero.skill;
+        name = hero.name;
+        chineseName = hero.chineseName;
     }
 
     public void setCrystal(int crystal) {
@@ -107,6 +113,7 @@ public class Hero extends Character {
         }
     }
 
+    // 释放技能
     public void castSpell(String spellName) throws ManaLessException {
         try {
             Spell spell = new Spell();
@@ -155,7 +162,15 @@ public class Hero extends Character {
     }
 
     public void useMinion(Minion minion) {
-        if (this.handCard.exist(minion.name)) {
+
+        if (curCrystal < minion.cost) {
+            throw new ManaLessException();
+        }
+
+
+
+
+        if (this.handCard.exist(minion)) {
             handCard.remove(minion);
             scene.addLast(minion);
         }

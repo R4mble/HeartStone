@@ -7,15 +7,14 @@ import lombok.Data;
 /**
  * @author Ramble
  */
-@Data
 public class Minion extends Character implements Card {
 
-    private Attribute[] attributes;
-    private int cost;
+    public Attribute[] attributes;
+    public int cost;
 
     @Override
     public String toString() {
-        return this.chineseName;
+        return this.name;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Skill {
     @ManaCost(value = 2, desc = "圣骑士技能")
     public void geneReporter(Hero hero) {
         Scene scene = hero.scene;
-        scene.addLast(InitGame.getMinion("Reporter"));
+        scene.addLast(InitGame.getMinion("报告兵"));
         hero.scene = (scene);
     }
 

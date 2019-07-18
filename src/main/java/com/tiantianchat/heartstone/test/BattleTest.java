@@ -18,7 +18,7 @@ import static com.tiantianchat.heartstone.InitGame.getMinion;
  */
 public class BattleTest {
 
-    public void test() {
+    public void battleBegin() {
         Hero fashi = getHero("法师");
         Hero shengqishi = getHero("圣骑士");
 
@@ -37,14 +37,19 @@ public class BattleTest {
             cardList.add(getMinion(((Minion) c).name));
         }
 
+        List<Card> cards2 = new ArrayList<>(cardList);
+
         fashi.cardLibrary = (new CardLibrary(cardList));
-        shengqishi.cardLibrary = (new CardLibrary(cardList));
+        shengqishi.cardLibrary = (new CardLibrary(cards2));
 
         fashi.drawCard(4);
         shengqishi.drawCard(4);
 
-        System.out.println(fashi.handCard);
-        System.out.println(shengqishi.handCard);
+        assert fashi.handCard.size() == 4;
+        assert shengqishi.handCard.size() == 4;
+        assert fashi.cardLibrary.size() == 26;
+        assert shengqishi.cardLibrary.size() == 26;
 
     }
+
 }

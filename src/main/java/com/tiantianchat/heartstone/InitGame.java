@@ -60,7 +60,6 @@ public class InitGame {
             m.chineseName = (o1.get("chineseName").toString());
             m.attack = (Integer.parseInt(o1.get("attack").toString()));
             m.blood = (Integer.parseInt(o1.get("blood").toString()));
-            m.curBlood = (Integer.parseInt(o1.get("blood").toString()));
             minionBox.add(m);
         }
 
@@ -83,26 +82,40 @@ public class InitGame {
     }
 
     public static Hero getHero(String heroName) {
-        return heroBox.stream()
-                    .filter(p -> p.name.equals(heroName) || p.chineseName.equals(heroName))
-                    .findFirst()
-                    .orElse(null);
+        Hero hero = new Hero();
+        for (Hero h : heroBox) {
+            if (h.name.equals(heroName) || h.chineseName.equals(heroName)) {
+                hero.name = h.name;
+                hero.chineseName = h.chineseName;
+                hero.skill = h.skill;
+            }
+        }
+        return hero;
     }
 
     public static Minion getMinion(String minionName) {
-        Minion m = minionBox.stream()
-                .filter(p -> p.name.equals(minionName) || p.chineseName.equals(minionName))
-                .findFirst()
-                .orElse(null);
-
-        Minion r = new Minion();
-        BeanUtils.copyProperties(m, r);
-        return r;
+        Minion minion = new Minion();
+        for (Minion m : minionBox) {
+            if (m.name.equals(minionName) || m.chineseName.equals(minionName)) {
+                minion.name = m.name;
+                minion.chineseName = m.chineseName;
+                minion.setAttack(m.attack);
+                minion.setBlood(m.blood);
+            }
+        }
+        return minion;
     }
 
     public static Weapon getWeapon(String weaponName) {
-        Weapon m = weaponBox.stream()
+        return weaponBox.stream()
                 .filter(p -> p.name.equals(weaponName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private <T> T getObject(List<T> box) {
+        T t = box.stream()
+                .filter((T)p -> p.name.equals(minionName))
                 .findFirst()
                 .orElse(null);
 
@@ -110,15 +123,4 @@ public class InitGame {
         BeanUtils.copyProperties(m, r);
         return r;
     }
-
-//    private <T> T getObject(List<T> box) {
-//        T t = box.stream()
-//                .filter((T)p -> p.name.equals(minionName))
-//                .findFirst()
-//                .orElse(null);
-//
-//        Weapon r = new Weapon();
-//        BeanUtils.copyProperties(m, r);
-//        return r;
-//    }
 }

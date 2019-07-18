@@ -1,8 +1,10 @@
 package com.tiantianchat.heartstone.test;
 
 import com.tiantianchat.heartstone.character.Hero;
+import com.tiantianchat.heartstone.character.Minion;
 import com.tiantianchat.heartstone.model.Card;
 import com.tiantianchat.heartstone.model.CardLibrary;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,16 @@ public class MinionTest {
         fashi.useMinion(fashi.handCard.getMinion(0));
         assert fashi.handCard.size() == 3;
         assert fashi.scene.size() == 1;
+    }
+
+    @Test
+    public void useMinion() {
+        Hero shaman = getHero("Shaman");
+        Minion m = getMinion("精灵弓箭手");
+        shaman.handCard.addLast(m);
+
+        shaman.useMinion(m);
+
     }
 
     public void attack() {

@@ -30,11 +30,11 @@ public class HandCard {
     }
 
 
-    public boolean exist(String minionName) {
+    public boolean exist(Card tarCard) {
         for (Card card : handCards) {
             if (card instanceof Minion) {
                 Minion m = (Minion)card;
-                if (m.chineseName.equals(minionName) || m.name.equals(minionName)) {
+                if (m == tarCard) {
                     return true;
                 }
             }
