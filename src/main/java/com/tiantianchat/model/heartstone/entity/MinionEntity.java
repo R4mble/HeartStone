@@ -22,8 +22,10 @@ public class MinionEntity implements Card, GameCharacter {
     private Integer cost;
     private Integer attack;
     private Integer blood;
+    private String battleCry;
+    private String profession;
 
     public Minion toDTO() {
-        return new Minion(name, cost, attack, blood);
+        return new Minion(name, cost, attack, blood, battleCry);
     }
 }

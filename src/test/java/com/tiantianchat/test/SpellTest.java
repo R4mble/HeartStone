@@ -1,10 +1,12 @@
 package com.tiantianchat.test;
 
 import com.tiantianchat.heartstone.skill.SkillInvoker;
+import com.tiantianchat.heartstone.skill.SpellInvoker;
 import com.tiantianchat.model.heartstone.dto.Profession;
 import com.tiantianchat.repository.MinionRepository;
 import com.tiantianchat.repository.ProfessionRepository;
 import com.tiantianchat.repository.WeaponRepository;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +24,9 @@ public class SpellTest {
     private SkillInvoker skillInvoker;
 
     @Autowired
+    private SpellInvoker spellInvoker;
+
+    @Autowired
     private ProfessionRepository pr;
 
     @Autowired
@@ -31,15 +36,36 @@ public class SpellTest {
     private WeaponRepository wr;
 
 
+    @Test
     public void testLuckyCoin() {
-        Profession shaman = pr.findByName("Shaman").toDTO();
-        shaman.castSpell("luckyCoin");
-        assert shaman.curCrystal == 1;
+        Profession shaman = pr.findByName("萨满").toDTO();
+        spellInvoker.invoke(shaman, "luckyCoin");
 
-        shaman.castSpell("luckyCoin");
-        shaman.castSpell("luckyCoin");
-        shaman.castSpell("luckyCoin");
+        assert shaman.getCurCrystal() == 1;
 
-        assert shaman.curCrystal == 4;
+        spellInvoker.invoke(shaman, "luckyCoin");
+        spellInvoker.invoke(shaman, "luckyCoin");
+        spellInvoker.invoke(shaman, "luckyCoin");
+
+
+        assert shaman.getCurCrystal() == 4;
+    }
+
+    @Test
+    public void testFireBall() {
+        Profession zie = pr.findByName("潜行者").toDTO();
+        Profession fashi = pr.findByName("法师").toDTO();
+
+        zie.setCrystal(6);
+
+        spellInvoker.invoke(zie, "fireBall", fashi);
+
+        assert zie.getCurCrystal() == 2;
+        assert fashi.getCurBlood() == 24;
+    }
+
+    @Test
+    public void test() {
+
     }
 }

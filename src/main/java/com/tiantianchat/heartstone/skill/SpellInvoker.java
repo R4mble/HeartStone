@@ -11,52 +11,49 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * @author Wangyl
- * @date 2019/7/19
+ * @author Ramble
  */
 @Component
-public class SkillInvoker {
+public class SpellInvoker {
 
-    private final Skill skill;
+    private final Spell spell;
 
     @Autowired
-    public SkillInvoker(Skill skill) {
-        this.skill = skill;
+    public SpellInvoker(Spell spell) {
+        this.spell = spell;
     }
 
-    public void invoke(Profession src) {
+    // 不需要指定目标的法术
+    public void invoke(Profession src, String spellName) throws ManaLessException {
 
         try {
-            Method method = skill.getClass().getMethod(src.getSkill(), Profession.class);
+            Method method = spell.getClass().getMethod(spellName, Profession.class);
 
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
             if (src.getCurCrystal() < manaCost.value()) {
                 throw new ManaLessException();
             }
-            method.invoke(skill, src);
+
+            method.invoke(spell, src);
 
             src.setCurCrystal(src.getCurCrystal() - manaCost.value());
 
-        } catch (IllegalAccessException | NoSuchMethodException e) {
+        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             System.out.println(e);
-        } catch (InvocationTargetException e) {
-            if (e.getTargetException() instanceof ShamanTotemFullException) {
-                throw new ShamanTotemFullException();
-            }
         }
     }
 
-    public void invoke(Profession src, GameCharacter tar) {
+    public void invoke(Profession src, String spellName, GameCharacter tar) throws ManaLessException {
         try {
-            Method method = skill.getClass().getMethod(src.getSkill(), GameCharacter.class);
+            Method method = spell.getClass().getMethod(spellName, GameCharacter.class);
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
             if (src.getCurCrystal() < manaCost.value()) {
                 throw new ManaLessException();
             }
 
-            method.invoke(skill, tar);
+            method.invoke(spell, tar);
 
             src.setCurCrystal(src.getCurCrystal() - manaCost.value());
 

@@ -55,7 +55,7 @@ public class SkillTest {
         assert war.getCurBlood() == 30;
         assert war.getCurCrystal() == 0;
     }
-    
+
     @Test
     public void testFire() {
 
@@ -180,5 +180,17 @@ public class SkillTest {
         zie.setCrystal(3);
         skillInvoker.invoke(zie);
         assert zie.getWeapon().equals(wr.findByName("匕首").toDTO());
+    }
+
+    @Test
+    public void testReshape() {
+        Profession deluyi = pr.findByName("德鲁伊").toDTO();
+        deluyi.setCrystal(5);
+        skillInvoker.invoke(deluyi);
+        skillInvoker.invoke(deluyi);
+
+        assert deluyi.getHealth() == 32;
+        assert deluyi.getAttack() == 2;
+        assert deluyi.getCurCrystal() == 1;
     }
 }

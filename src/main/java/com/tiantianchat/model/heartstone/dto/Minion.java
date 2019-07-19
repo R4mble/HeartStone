@@ -19,11 +19,14 @@ public class Minion implements Card, GameCharacter {
     private int curAttack;
     private int blood;
     private int curBlood;
-    
-    public Minion(String name, int cost, int attack, int blood) {
+    private String battleCry;
+    private String profession;
+
+    public Minion(String name, int cost, int attack, int blood, String battleCry) {
         this.name = name;
         this.cost = cost;
         this.attack = attack;
         this.blood = blood;
+        this.battleCry = battleCry;
     }
 }

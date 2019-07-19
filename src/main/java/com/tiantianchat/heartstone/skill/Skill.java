@@ -20,14 +20,18 @@ import java.util.Random;
 @Component
 class Skill {
 
-    @Autowired
-    private MinionRepository mr;
+    private final MinionRepository mr;
+
+    private final WeaponRepository wr;
+
+    private final CardDrawer cd;
 
     @Autowired
-    private WeaponRepository wr;
-
-    @Autowired
-    private CardDrawer cd;
+    public Skill(MinionRepository mr, WeaponRepository wr, CardDrawer cd) {
+        this.mr = mr;
+        this.wr = wr;
+        this.cd = cd;
+    }
 
     @ManaCost(value = 2, desc = "战士技能")
     public void add2Armor(Profession src) {
