@@ -1,6 +1,7 @@
 package com.tiantianchat.heartstone.skill;
 
 import com.tiantianchat.heartstone.exception.ManaLessException;
+import com.tiantianchat.heartstone.exception.ShamanTotemFullException;
 import com.tiantianchat.model.heartstone.GameCharacter;
 import com.tiantianchat.model.heartstone.dto.Profession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class SkillInvoker {
     @Autowired
     private Skill skill;
 
-    public void invoke(Profession src) throws ManaLessException {
+    public void invoke(Profession src) throws ManaLessException, ShamanTotemFullException {
 
 
         try {
@@ -30,7 +31,6 @@ public class SkillInvoker {
             if (src.getCurCrystal() < manaCost.value()) {
                 throw new ManaLessException();
             }
-
             method.invoke(skill, src);
 
             src.setCurCrystal(src.getCurCrystal() - manaCost.value());

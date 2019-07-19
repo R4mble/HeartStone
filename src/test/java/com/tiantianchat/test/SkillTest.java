@@ -2,13 +2,17 @@ package com.tiantianchat.test;
 
 import com.tiantianchat.heartstone.exception.ManaLessException;
 import com.tiantianchat.heartstone.skill.SkillInvoker;
+import com.tiantianchat.model.heartstone.dto.Minion;
 import com.tiantianchat.model.heartstone.dto.Profession;
+import com.tiantianchat.repository.MinionRepository;
 import com.tiantianchat.repository.ProfessionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
 
 
 /**
@@ -24,7 +28,10 @@ public class SkillTest {
 
     @Autowired
     private ProfessionRepository pr;
-    
+
+    @Autowired
+    private MinionRepository mr;
+
     @Test
     public void testAdd2Armor() {
         Profession war = pr.findByName("战士").toDTO();
@@ -72,30 +79,30 @@ public class SkillTest {
         skillInvoker.invoke(paladin);
         skillInvoker.invoke(paladin);
 
-
         assert paladin.getCurCrystal() == 0;
 
-//        Minion reporter = getMinion("报告兵");
-//        assert paladin.scene.getMinions()
-//                    .equals(Arrays.asList(reporter, reporter, reporter, reporter));
+        Minion reporter = mr.findByName("报告兵").toDTO();
+        assert paladin.getScene()
+                    .equals(Arrays.asList(reporter, reporter, reporter, reporter));
     }
 
-//    @Test
-//    public void testGeneTotem() {
-//        Profession shaman = pr.findByName("萨满");
-//
-//        shaman.setCrystal(8);
-//
-//        shaman.invokeSkill();
-//        shaman.invokeSkill();
-//        shaman.invokeSkill();
-//        shaman.invokeSkill();
-//
-//        assert shaman.curCrystal == 0;
-//
-//        assert shaman.scene.size() == 4;
-//    }
-//
+    @Test
+    public void testGeneTotem() {
+        Profession shaman = pr.findByName("萨满").toDTO();
+
+        shaman.setCrystal(100);
+
+        skillInvoker.invoke(shaman);
+        skillInvoker.invoke(shaman);
+        skillInvoker.invoke(shaman);
+        skillInvoker.invoke(shaman);
+        skillInvoker.invoke(shaman);
+
+        assert shaman.getCurCrystal() == 0;
+
+        assert shaman.getScene().size() == 4;
+    }
+
 //    @Test
 //    public void testHeal() {
 //        Profession mushi = pr.findByName("牧师");

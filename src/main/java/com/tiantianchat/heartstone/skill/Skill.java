@@ -1,6 +1,7 @@
 package com.tiantianchat.heartstone.skill;
 
 import com.tiantianchat.heartstone.character.Hero;
+import com.tiantianchat.heartstone.exception.ShamanTotemFullException;
 import com.tiantianchat.model.heartstone.Card;
 import com.tiantianchat.model.heartstone.GameCharacter;
 import com.tiantianchat.model.heartstone.dto.Minion;
@@ -10,7 +11,11 @@ import com.tiantianchat.repository.MinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Min;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Ramble
@@ -34,10 +39,8 @@ class Skill {
 //
     @ManaCost(value = 2, desc = "圣骑士技能")
     public void geneReporter(Profession src) {
-        List<Card> scene = src.getScene();
-
-        MinionEntity m = mr.findByName("报告兵");
-        scene.add(m.toDTO());
+        List<Minion> scene = src.getScene();
+        scene.add(mr.findByName("报告兵").toDTO());
         src.setScene(scene);
     }
 
@@ -75,32 +78,34 @@ class Skill {
 //        src.curBlood = (src.curBlood - 2);
 //        src.drawCard(1);
 //    }
-//
-//    @ManaCost(value = 2, desc = "萨满技能")
-//    public void geneTotem(Profession src) {
-//        Scene scene = src.scene;
-//
-//        List<Minion> basicTotems = Arrays.asList(
-//                InitGame.getMinion("灼热图腾"),
-//                InitGame.getMinion("法强图腾"),
-//                InitGame.getMinion("治疗图腾"),
-//                InitGame.getMinion("嘲讽图腾")
-//        );
-//
-//        List<Minion> availableTotems = new ArrayList<>();
-//        basicTotems.forEach(t -> {
-//            if (!scene.exist(t.name)) {
-//                availableTotems.add(t);
-//            }
-//        });
-//
-//        if (availableTotems.size() == 0) {
-//            throw new ShamanTotemFullException();
-//        }
-//
-//        int randomIndex = new Random().nextInt(availableTotems.size());
-//
-//        scene.addLast(availableTotems.get(randomIndex));
-//        src.scene = (scene);
-//    }
+
+    @ManaCost(value = 2, desc = "萨满技能")
+    public void geneTotem(Profession src) throws ShamanTotemFullException {
+
+        List<Minion> scene = src.getScene();
+
+        List<Minion> basicTotems = Arrays.asList(
+                mr.findByName("灼热图腾").toDTO(),
+                mr.findByName("法强图腾").toDTO(),
+                mr.findByName("治疗图腾").toDTO(),
+                mr.findByName("嘲讽图腾").toDTO()
+        );
+
+        List<Minion> availableTotems = new ArrayList<>();
+
+        basicTotems.forEach(t -> {
+            if (!scene.contains(t)) {
+                availableTotems.add(t);
+            }
+        });
+
+        if (availableTotems.size() == 0) {
+            throw new ShamanTotemFullException();
+        }
+
+        int randomIndex = new Random().nextInt(availableTotems.size());
+
+        scene.add(availableTotems.get(randomIndex));
+        src.setScene(scene);
+    }
 }

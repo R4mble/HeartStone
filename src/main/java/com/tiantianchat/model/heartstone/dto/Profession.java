@@ -24,7 +24,7 @@ public class Profession implements GameCharacter {
     private int crystal;
     private int curCrystal;
     private List<Card> handCard = new LinkedList<>();
-    private List<Card> scene = new LinkedList<>();
+    private List<Minion> scene = new LinkedList<>();
     private List<Card> cardLibrary = new LinkedList<>();
 
     public Profession(String name, String skill) {
