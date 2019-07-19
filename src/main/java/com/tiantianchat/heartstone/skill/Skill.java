@@ -26,17 +26,20 @@ class Skill {
     @Autowired
     private WeaponRepository wr;
 
+    @Autowired
+    private CardDrawer cd;
+
     @ManaCost(value = 2, desc = "战士技能")
     public void add2Armor(Profession src) {
         src.setArmor(src.getArmor() + 2);
     }
 
-//    @ManaCost(value = 2, desc = "德鲁伊技能")
-//    public void reshape(Profession src) {
-//        src.armor++;
-//        src.attack++;
-//    }
-//
+    @ManaCost(value = 2, desc = "德鲁伊技能")
+    public void reshape(Profession src) {
+        src.setArmor(src.getArmor() + 1);
+        src.setAttack(src.getAttack() + 1);
+    }
+
     @ManaCost(value = 2, desc = "圣骑士技能")
     public void geneReporter(Profession src) {
         List<Minion> scene = src.getScene();
@@ -86,14 +89,14 @@ class Skill {
 
     @ManaCost(value = 2, desc = "潜行者技能")
     public void equipDagger(Profession src) {
-        src.setWeapon(wr.findByName("匕首"));
+        src.setWeapon(wr.findByName("匕首").toDTO());
     }
-//
-//    @ManaCost(value = 2, desc = "术士技能")
-//    public void drawCard(Profession src) {
-//        src.curBlood = (src.curBlood - 2);
-//        src.drawCard(1);
-//    }
+
+    @ManaCost(value = 2, desc = "术士技能")
+    public void drawCard(Profession src) {
+        src.setCurBlood(src.getCurBlood() - 2);
+        cd.draw(src, 1);
+    }
 
     @ManaCost(value = 2, desc = "萨满技能")
     public void geneTotem(Profession src) throws ShamanTotemFullException {

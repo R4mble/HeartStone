@@ -3,17 +3,21 @@ package com.tiantianchat.test;
 import com.tiantianchat.heartstone.exception.ManaLessException;
 import com.tiantianchat.heartstone.exception.ShamanTotemFullException;
 import com.tiantianchat.heartstone.skill.SkillInvoker;
+import com.tiantianchat.model.heartstone.Card;
 import com.tiantianchat.model.heartstone.dto.Minion;
 import com.tiantianchat.model.heartstone.dto.Profession;
 import com.tiantianchat.repository.MinionRepository;
 import com.tiantianchat.repository.ProfessionRepository;
+import com.tiantianchat.repository.WeaponRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -32,6 +36,9 @@ public class SkillTest {
 
     @Autowired
     private MinionRepository mr;
+
+    @Autowired
+    private WeaponRepository wr;
 
     @Test
     public void testAdd2Armor() {
@@ -146,32 +153,32 @@ public class SkillTest {
         assert hunter.getCurCrystal() == 1;
     }
 
-//    @Test
-//    public void testDrawCard() {
-//        Profession shushi = pr.findByName("术士");
-//
-//        List<Card> cards = new ArrayList<>();
-//
-//        for (int i = 0; i < 30; i++) {
-//            cards.add(getMinion("淡水鳄"));
-//        }
-//
-//        shushi.curCrystal = (3);
-//        shushi.cardLibrary = (new CardLibrary(cards));
-//
-//        shushi.invokeSkill();
-//
-//        assert shushi.curCrystal == 1;
-//        assert shushi.curBlood == 28;
-//        assert shushi.handCard.size() == 1;
-//        assert shushi.cardLibrary.size() == 29;
-//    }
-//
-//    @Test
-//    public void testEquipDagger() {
-//        Profession zie = pr.findByName("潜行者");
-//        zie.setCrystal(3);
-//        zie.invokeSkill();
-//        assert zie.weapon.equals(getWeapon("匕首"));
-//    }
+    @Test
+    public void testDrawCard() {
+        Profession shushi = pr.findByName("术士").toDTO();
+
+        List<Card> cards = new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            cards.add(mr.findByName("淡水鳄"));
+        }
+
+        shushi.setCrystal(3);
+        shushi.setCardLibrary(cards);
+
+        skillInvoker.invoke(shushi);
+
+        assert shushi.getCurCrystal() == 1;
+        assert shushi.getCurBlood() == 28;
+        assert shushi.getHandCard().size() == 1;
+        assert shushi.getCardLibrary().size() == 29;
+    }
+
+    @Test
+    public void testEquipDagger() {
+        Profession zie = pr.findByName("潜行者").toDTO();
+        zie.setCrystal(3);
+        skillInvoker.invoke(zie);
+        assert zie.getWeapon().equals(wr.findByName("匕首").toDTO());
+    }
 }

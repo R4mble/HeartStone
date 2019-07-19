@@ -1,5 +1,9 @@
 package com.tiantianchat.heartstone.skill;
 
+import com.tiantianchat.model.heartstone.GameCharacter;
+import com.tiantianchat.model.heartstone.dto.Minion;
+import com.tiantianchat.model.heartstone.dto.Profession;
+
 /**
  * @author Wangyl
  * @date 2019/7/10
@@ -7,22 +11,20 @@ package com.tiantianchat.heartstone.skill;
 public class Spell {
 
     @ManaCost(value = 0, desc = "幸运币")
-    public void luckyCoin(Hero hero) {
-        hero.curCrystal = (hero.curCrystal + 1);
+    public void luckyCoin(Profession src) {
+        src.setCrystal(src.getCurCrystal() + 1);
     }
 
     @ManaCost(value = 4, desc = "火球术")
-    public void fileBall(Hero hero, Character character) {
-        character.curBlood = (character.curBlood - 6);
+    public void fileBall(Profession src, GameCharacter tar) {
+
     }
 
     @ManaCost(value = 10, desc = "炎爆")
-    public void pyroblast(Hero hero, Character character) {
-        character.curBlood = (character.curBlood - 10);
+    public void pyroblast(Profession src, GameCharacter tar) {
     }
 
     @ManaCost(value = 3, desc = "暗影箭")
-    public void shadowArrow(Hero hero, Minion minion) {
-        minion.curBlood = (minion.curBlood - 4);
+    public void shadowArrow(Profession src, Minion minion) {
     }
 }

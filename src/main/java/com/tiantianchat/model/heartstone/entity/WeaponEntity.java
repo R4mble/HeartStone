@@ -1,5 +1,6 @@
 package com.tiantianchat.model.heartstone.entity;
 
+import com.tiantianchat.model.heartstone.dto.Weapon;
 import lombok.Data;
 
 import javax.persistence.*;
