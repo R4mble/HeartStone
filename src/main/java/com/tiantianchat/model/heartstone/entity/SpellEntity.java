@@ -1,19 +1,18 @@
-package com.tiantianchat.model.heartstone;
+package com.tiantianchat.model.heartstone.entity;
 
+import com.tiantianchat.model.heartstone.Card;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Wangyl
  * @date 2019/7/19
  */
-@Data
 @Entity
-public class Spell implements Card {
+@Table(name = "spell")
+@Data
+public class SpellEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

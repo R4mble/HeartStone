@@ -3,12 +3,7 @@ package com.tiantianchat.heartstone.character;
 import com.tiantianchat.heartstone.exception.AttackZeroException;
 import com.tiantianchat.heartstone.exception.ManaLessException;
 import com.tiantianchat.heartstone.model.*;
-import com.tiantianchat.heartstone.skill.ManaCost;
-import com.tiantianchat.heartstone.skill.Skill;
 import com.tiantianchat.heartstone.skill.Spell;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -79,44 +74,44 @@ public class Hero extends Character {
 
 
 
-    // 释放技能
-    public void castSpell(String spellName) throws ManaLessException {
-        try {
-            Spell spell = new Spell();
-            Method method = spell.getClass().getMethod(spellName, Hero.class);
-            ManaCost manaCost = method.getAnnotation(ManaCost.class);
+//    // 释放技能
+//    public void castSpell(String spellName) throws ManaLessException {
+//        try {
+//            Spell spell = new Spell();
+//            Method method = spell.getClass().getMethod(spellName, Hero.class);
+//            ManaCost manaCost = method.getAnnotation(ManaCost.class);
+//
+//            if (this.curCrystal < manaCost.value()) {
+//                throw new ManaLessException();
+//            }
+//
+//            method.invoke(spell, this);
+//
+//            curCrystal = (curCrystal - manaCost.value());
+//
+//        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+//            System.out.println(e);
+//        }
+//    }
 
-            if (this.curCrystal < manaCost.value()) {
-                throw new ManaLessException();
-            }
-
-            method.invoke(spell, this);
-
-            curCrystal = (curCrystal - manaCost.value());
-
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            System.out.println(e);
-        }
-    }
-
-    public void castSpell(String spellName, Character character) throws ManaLessException {
-        try {
-            Skill skill = new Skill();
-            Method method = skill.getClass().getMethod(this.skill, Hero.class, Character.class);
-            ManaCost manaCost = method.getAnnotation(ManaCost.class);
-
-            if (curCrystal < manaCost.value()) {
-                throw new ManaLessException();
-            }
-
-            method.invoke(skill, this, character);
-
-            this.setCrystal(curCrystal - manaCost.value());
-
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            System.out.println(e);
-        }
-    }
+//    public void castSpell(String spellName, Character character) throws ManaLessException {
+//        try {
+//            Skill skill = new Skill();
+//            Method method = skill.getClass().getMethod(this.skill, Hero.class, Character.class);
+//            ManaCost manaCost = method.getAnnotation(ManaCost.class);
+//
+//            if (curCrystal < manaCost.value()) {
+//                throw new ManaLessException();
+//            }
+//
+//            method.invoke(skill, this, character);
+//
+//            this.setCrystal(curCrystal - manaCost.value());
+//
+//        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+//            System.out.println(e);
+//        }
+//    }
 
 
     public void drawCard(int cardNum) {

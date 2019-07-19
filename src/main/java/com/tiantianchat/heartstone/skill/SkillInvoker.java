@@ -1,7 +1,10 @@
 package com.tiantianchat.heartstone.skill;
 
 import com.tiantianchat.heartstone.exception.ManaLessException;
-import com.tiantianchat.model.heartstone.entity.ProfessionEntity;
+import com.tiantianchat.model.heartstone.GameCharacter;
+import com.tiantianchat.model.heartstone.dto.Profession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,14 +13,17 @@ import java.lang.reflect.Method;
  * @author Wangyl
  * @date 2019/7/19
  */
+@Component
 public class SkillInvoker {
 
-    public static void invokeSkill(ProfessionEntity src) throws ManaLessException {
+    @Autowired
+    private Skill skill;
 
-        Skill skill = new Skill();
+    public void invoke(Profession src) throws ManaLessException {
+
 
         try {
-            Method method = skill.getClass().getMethod(src.getSkill(), ProfessionEntity.class);
+            Method method = skill.getClass().getMethod(src.getSkill(), Profession.class);
 
             ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
@@ -27,28 +33,27 @@ public class SkillInvoker {
 
             method.invoke(skill, src);
 
-            src.setCurCrystal(src.getCrystal() - manaCost.value());
+            src.setCurCrystal(src.getCurCrystal() - manaCost.value());
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             System.out.println(e);
         }
     }
 
-//    public void invokeSkill(ProfessionEntity src, Character tar) throws ManaLessException {
-//        try {
-//            Skill skill = new Skill();
-//            Method method = skill.getClass().getMethod(this.skill, Hero.class, Character.class);
-//            ManaCost manaCost = method.getAnnotation(ManaCost.class);
-//
-//            if (curCrystal < manaCost.value()) {
-//                throw new ManaLessException();
-//            }
-//
-//            method.invoke(skill, this, character);
-//
-//            curCrystal = (curCrystal - manaCost.value());
-//
-//        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-//            System.out.println(e);
-//        }
-//    }
+    public void invoke(Profession src, GameCharacter tar) throws ManaLessException {
+        try {
+            Method method = skill.getClass().getMethod(src.getSkill(), GameCharacter.class);
+            ManaCost manaCost = method.getAnnotation(ManaCost.class);
+
+            if (src.getCurCrystal() < manaCost.value()) {
+                throw new ManaLessException();
+            }
+
+            method.invoke(skill, tar);
+
+            src.setCurCrystal(src.getCurCrystal() - manaCost.value());
+
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            System.out.println(e);
+        }
+    }
 }

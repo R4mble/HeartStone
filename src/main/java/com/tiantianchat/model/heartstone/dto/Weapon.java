@@ -1,5 +1,6 @@
-package com.tiantianchat.model.heartstone;
+package com.tiantianchat.model.heartstone.dto;
 
+import com.tiantianchat.model.heartstone.Card;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -11,14 +12,9 @@ import javax.persistence.Id;
  * @author Wangyl
  * @date 2019/7/19
  */
-@Entity
 @Data
-public class Minion implements Card, Character {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Weapon implements Card {
     private String name;
-    private Integer cost;
     private Integer attack;
-    private Integer blood;
+    private Integer durability;
 }

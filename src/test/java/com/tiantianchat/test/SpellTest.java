@@ -10,15 +10,15 @@ import static com.tiantianchat.heartstone.InitGame.getHero;
  */
 public class SpellTest {
 
-    public void testLuckyCoin() {
-        Hero shaman = getHero("Shaman");
-        shaman.castSpell("luckyCoin");
-        assert shaman.curCrystal == 1;
-
-        shaman.castSpell("luckyCoin");
-        shaman.castSpell("luckyCoin");
-        shaman.castSpell("luckyCoin");
-
-        assert shaman.curCrystal == 4;
-    }
+//    public void testLuckyCoin() {
+//        Hero shaman = getHero("Shaman");
+//        shaman.castSpell("luckyCoin");
+//        assert shaman.curCrystal == 1;
+//
+//        shaman.castSpell("luckyCoin");
+//        shaman.castSpell("luckyCoin");
+//        shaman.castSpell("luckyCoin");
+//
+//        assert shaman.curCrystal == 4;
+//    }
 }

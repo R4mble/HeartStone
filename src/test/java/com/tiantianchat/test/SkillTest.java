@@ -1,7 +1,8 @@
 package com.tiantianchat.test;
 
+import com.tiantianchat.heartstone.exception.ManaLessException;
 import com.tiantianchat.heartstone.skill.SkillInvoker;
-import com.tiantianchat.model.heartstone.entity.ProfessionEntity;
+import com.tiantianchat.model.heartstone.dto.Profession;
 import com.tiantianchat.repository.ProfessionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,34 +20,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SkillTest {
 
     @Autowired
-    private ProfessionRepository pr;
+    private SkillInvoker skillInvoker;
 
-//    @Test
-//    public void testFire() {
-//
-//        ProfessionEntity mage = pr.findByName("法师");
-//        ProfessionEntity war = pr.findByName("战士");
-//
-//        mage.setCrystal(3);
-//
-//        mage.invokeSkill(war);
-//
-//        try {
-//            mage.invokeSkill(war);
-//        } catch (Exception e) {
-//            assert e instanceof ManaLessException;
-//        }
-//
-//        assert mage.curCrystal == 1;
-//        assert war.getHealth() == 29;
-//    }
-//
+    @Autowired
+    private ProfessionRepository pr;
+    
     @Test
     public void testAdd2Armor() {
-        ProfessionEntity war = pr.findByName("战士");
+        Profession war = pr.findByName("战士").toDTO();
 
         war.setCrystal(6);
-        SkillInvoker.invokeSkill(war);
+        skillInvoker.invoke(war);
+        skillInvoker.invoke(war);
+        skillInvoker.invoke(war);
 
         assert war.getHealth() == 36;
         assert war.getArmor() == 6;
@@ -54,28 +40,49 @@ public class SkillTest {
         assert war.getCurBlood() == 30;
         assert war.getCurCrystal() == 0;
     }
-//
-//    @Test
-//    public void testGeneReporter() {
-//        ProfessionEntity paladin = pr.findByName("Paladin");
-//
-//        paladin.setCrystal(8);
-//
-//        paladin.invokeSkill();
-//        paladin.invokeSkill();
-//        paladin.invokeSkill();
-//        paladin.invokeSkill();
-//
-//        assert paladin.curCrystal == 0;
-//
+    
+    @Test
+    public void testFire() {
+
+        Profession mage = pr.findByName("法师").toDTO();
+        Profession war = pr.findByName("战士").toDTO();
+
+        mage.setCrystal(3);
+
+        skillInvoker.invoke(mage, war);
+
+        try {
+            skillInvoker.invoke(mage, war);
+        } catch (Exception e) {
+            assert e instanceof ManaLessException;
+        }
+
+        assert mage.getCurCrystal() == 1;
+        assert war.getHealth() == 29;
+    }
+
+    @Test
+    public void testGeneReporter() {
+        Profession paladin = pr.findByName("圣骑士").toDTO();
+
+        paladin.setCrystal(8);
+
+        skillInvoker.invoke(paladin);
+        skillInvoker.invoke(paladin);
+        skillInvoker.invoke(paladin);
+        skillInvoker.invoke(paladin);
+
+
+        assert paladin.getCurCrystal() == 0;
+
 //        Minion reporter = getMinion("报告兵");
 //        assert paladin.scene.getMinions()
 //                    .equals(Arrays.asList(reporter, reporter, reporter, reporter));
-//    }
-//
+    }
+
 //    @Test
 //    public void testGeneTotem() {
-//        ProfessionEntity shaman = pr.findByName("萨满");
+//        Profession shaman = pr.findByName("萨满");
 //
 //        shaman.setCrystal(8);
 //
@@ -91,11 +98,11 @@ public class SkillTest {
 //
 //    @Test
 //    public void testHeal() {
-//        ProfessionEntity mushi = pr.findByName("牧师");
+//        Profession mushi = pr.findByName("牧师");
 //        mushi.setCrystal(6);
 //
 //        Minion reporter = getMinion("报告兵");
-//        ProfessionEntity paladin = pr.findByName("Paladin");
+//        Profession paladin = pr.findByName("Paladin");
 //
 //        paladin.curBlood = (29);
 //        mushi.invokeSkill(paladin);
@@ -111,8 +118,8 @@ public class SkillTest {
 //
 //    @Test
 //    public void testShoot() {
-//        ProfessionEntity hunter = pr.findByName("Hunter");
-//        ProfessionEntity war = pr.findByName("战士");
+//        Profession hunter = pr.findByName("Hunter");
+//        Profession war = pr.findByName("战士");
 //
 //        war.setCrystal(3);
 //        war.invokeSkill();
@@ -128,7 +135,7 @@ public class SkillTest {
 //
 //    @Test
 //    public void testDrawCard() {
-//        ProfessionEntity shushi = pr.findByName("术士");
+//        Profession shushi = pr.findByName("术士");
 //
 //        List<Card> cards = new ArrayList<>();
 //
@@ -149,7 +156,7 @@ public class SkillTest {
 //
 //    @Test
 //    public void testEquipDagger() {
-//        ProfessionEntity zie = pr.findByName("潜行者");
+//        Profession zie = pr.findByName("潜行者");
 //        zie.setCrystal(3);
 //        zie.invokeSkill();
 //        assert zie.weapon.equals(getWeapon("匕首"));

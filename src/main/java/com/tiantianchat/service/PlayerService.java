@@ -1,6 +1,6 @@
 package com.tiantianchat.service;
 
-import com.tiantianchat.model.heartstone.Player;
+import com.tiantianchat.model.heartstone.entity.PlayerEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +13,7 @@ public class PlayerService {
         return false;
     }
 
-    public Player login(String nameOrEmail, String password) {
+    public PlayerEntity login(String nameOrEmail, String password) {
         return null;
     }
 }

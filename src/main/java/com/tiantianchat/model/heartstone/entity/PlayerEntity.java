@@ -1,4 +1,4 @@
-package com.tiantianchat.model.heartstone;
+package com.tiantianchat.model.heartstone.entity;
 
 import lombok.Data;
 
@@ -10,8 +10,9 @@ import java.util.Map;
  * @date 2019/7/16
  */
 @Entity
+@Table(name = "player")
 @Data
-public class Player {
+public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +22,6 @@ public class Player {
     private Integer goldCoin;
     @ElementCollection
     private Map<String, Integer> heroExperience;
-    private Player[] friends;
-    private Player[] blocks;
+    private PlayerEntity[] friends;
+    private PlayerEntity[] blocks;
 }

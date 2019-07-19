@@ -1,6 +1,6 @@
 package com.tiantianchat.config;
 
-import com.tiantianchat.model.heartstone.Player;
+import com.tiantianchat.model.heartstone.entity.PlayerEntity;
 import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.Cookie;
@@ -36,12 +36,12 @@ public class CommonUtils {
         response.addCookie(cookie);
     }
 
-    public static Player getLoginUser(HttpServletRequest request) {
+    public static PlayerEntity getLoginUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (null == session) {
             return null;
         }
-        return (Player) session.getAttribute(WebConstants.LOGIN_SESSION_KEY);
+        return (PlayerEntity) session.getAttribute(WebConstants.LOGIN_SESSION_KEY);
     }
 
 }

@@ -3,7 +3,7 @@ package com.tiantianchat.controller;
 import com.tiantianchat.config.CommonUtils;
 import com.tiantianchat.config.JwtService;
 import com.tiantianchat.config.WebConstants;
-import com.tiantianchat.model.heartstone.Player;
+import com.tiantianchat.model.heartstone.entity.PlayerEntity;
 import com.tiantianchat.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class PlayerController {
 
     @PostMapping("/follow")
-    public Player follow() {
+    public PlayerEntity follow() {
         return null;
     }
 
@@ -36,7 +36,7 @@ public class PlayerController {
     private JwtService jwtService;
 
     @PostMapping("/users")
-    public ResponseEntity createUser(@Valid @RequestBody Player user) {
+    public ResponseEntity createUser(@Valid @RequestBody PlayerEntity user) {
         boolean res =  userService.createUser(user.getEmail(), user.getPassword(), user.getPassword());
         if (res) {
             return ResponseEntity.ok("注册成功");
@@ -50,7 +50,7 @@ public class PlayerController {
                                     HttpServletRequest request,
                                     HttpServletResponse response) {
 
-        Player user = userService.login(nameOrEmail, password);
+        PlayerEntity user = userService.login(nameOrEmail, password);
         request.getSession().setAttribute(WebConstants.LOGIN_SESSION_KEY, user);
         CommonUtils.setCookie(response, Math.toIntExact(user.getId()));
         Map<String, Object> map = new HashMap<>(1);

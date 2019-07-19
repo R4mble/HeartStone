@@ -1,6 +1,6 @@
 package com.tiantianchat.config;
 
-import com.tiantianchat.model.heartstone.Player;
+import com.tiantianchat.model.heartstone.entity.PlayerEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +23,7 @@ public class JwtService {
     @Value("${jwt.sessionTime}")
     private int sessionTime;
 
-    public String toToken(Player user) {
+    public String toToken(PlayerEntity user) {
         return Jwts.builder()
                 .setSubject(String.valueOf(user.getId()))
                 .setExpiration(expireTimeFromNow())

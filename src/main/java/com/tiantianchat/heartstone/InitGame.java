@@ -85,21 +85,21 @@ public class InitGame {
     @Autowired
     private MinionRepository minionRepository;
 
-    @Test
-    public void init() {
-        List<com.tiantianchat.model.heartstone.Minion> list = new ArrayList<>();
-
-        for (Minion h : minionBox) {
-            com.tiantianchat.model.heartstone.Minion p = new com.tiantianchat.model.heartstone.Minion();
-            p.setName(h.name);
-            p.setAttack(h.attack);
-            p.setBlood(h.blood);
-            p.setCost(h.cost);
-            list.add(p);
-        }
-
-        minionRepository.saveAll(list);
-    }
+//    @Test
+//    public void init() {
+//        List<com.tiantianchat.model.heartstone.dto.Minion> list = new ArrayList<>();
+//
+//        for (Minion h : minionBox) {
+//            com.tiantianchat.model.heartstone.dto.Minion p = new com.tiantianchat.model.heartstone.dto.Minion();
+//            p.setName(h.name);
+//            p.setAttack(h.attack);
+//            p.setBlood(h.blood);
+//            p.setCost(h.cost);
+//            list.add(p);
+//        }
+//
+//        minionRepository.saveAll(list);
+//    }
 
 
     public static Hero getHero(String a) {
