@@ -1,7 +1,5 @@
 package com.tiantianchat.test;
 
-import com.tiantianchat.heartstone.InitGame;
-
 import java.lang.reflect.Method;
 
 

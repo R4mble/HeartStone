@@ -34,8 +34,13 @@ public class SkillInvoker {
             method.invoke(skill, src);
 
             src.setCurCrystal(src.getCurCrystal() - manaCost.value());
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+
+        } catch (IllegalAccessException | NoSuchMethodException e) {
             System.out.println(e);
+        } catch (InvocationTargetException e) {
+            if (e.getTargetException() instanceof ShamanTotemFullException) {
+                throw new ShamanTotemFullException();
+            }
         }
     }
 

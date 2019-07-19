@@ -1,14 +1,10 @@
 package com.tiantianchat.heartstone.skill;
 
-import com.tiantianchat.heartstone.character.Hero;
-import com.tiantianchat.heartstone.character.Minion;
-import com.tiantianchat.heartstone.model.Card;
-import com.tiantianchat.heartstone.character.Character;
 /**
  * @author Wangyl
  * @date 2019/7/10
  */
-public class Spell implements Card {
+public class Spell {
 
     @ManaCost(value = 0, desc = "幸运币")
     public void luckyCoin(Hero hero) {

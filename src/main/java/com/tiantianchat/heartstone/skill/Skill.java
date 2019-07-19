@@ -1,17 +1,14 @@
 package com.tiantianchat.heartstone.skill;
 
-import com.tiantianchat.heartstone.character.Hero;
 import com.tiantianchat.heartstone.exception.ShamanTotemFullException;
-import com.tiantianchat.model.heartstone.Card;
 import com.tiantianchat.model.heartstone.GameCharacter;
 import com.tiantianchat.model.heartstone.dto.Minion;
 import com.tiantianchat.model.heartstone.dto.Profession;
-import com.tiantianchat.model.heartstone.entity.MinionEntity;
 import com.tiantianchat.repository.MinionRepository;
+import com.tiantianchat.repository.WeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +22,9 @@ class Skill {
 
     @Autowired
     private MinionRepository mr;
+
+    @Autowired
+    private WeaponRepository wr;
 
     @ManaCost(value = 2, desc = "战士技能")
     public void add2Armor(Profession src) {
@@ -54,24 +54,40 @@ class Skill {
         }
     }
 
-//    @ManaCost(value = 2, desc = "猎人技能")
-//    public void shoot(Profession src, GameCharacter character) {
-//        character.curBlood = (character.curBlood - 2);
-//    }
-//
-//    @ManaCost(value = 2, desc = "牧师技能")
-//    public void heal(Profession src, GameCharacter character) {
-//        if (character.curBlood + 2 >= character.blood) {
-//            character.curBlood = (character.blood);
-//        } else {
-//            character.curBlood = (character.curBlood + 2);
-//        }
-//    }
-//
-//    @ManaCost(value = 2, desc = "潜行者技能")
-//    public void equipDagger(Profession src) {
-//        src.weapon = (InitGame.getWeapon("匕首"));
-//    }
+    @ManaCost(value = 2, desc = "猎人技能")
+    public void shoot(GameCharacter tar) {
+        if (tar instanceof Profession) {
+            Profession target = (Profession) tar;
+            target.setCurBlood(target.getCurBlood() - 2);
+        } else if (tar instanceof Minion) {
+            Minion target = (Minion) tar;
+            target.setCurBlood(target.getCurBlood() - 2);
+        }
+    }
+
+    @ManaCost(value = 2, desc = "牧师技能")
+    public void heal(GameCharacter tar) {
+        if (tar instanceof Profession) {
+            Profession target = (Profession) tar;
+            if (target.getCurBlood() + 2 >= target.getBlood()) {
+                target.setCurBlood(target.getBlood());
+            } else {
+                target.setCurBlood(target.getCurBlood() + 2);
+            }
+        } else if (tar instanceof Minion) {
+            Minion target = (Minion) tar;
+            if (target.getCurBlood() + 2 >= target.getBlood()) {
+                target.setCurBlood(target.getBlood());
+            } else {
+                target.setCurBlood(target.getCurBlood() + 2);
+            }
+        }
+    }
+
+    @ManaCost(value = 2, desc = "潜行者技能")
+    public void equipDagger(Profession src) {
+        src.setWeapon(wr.findByName("匕首"));
+    }
 //
 //    @ManaCost(value = 2, desc = "术士技能")
 //    public void drawCard(Profession src) {

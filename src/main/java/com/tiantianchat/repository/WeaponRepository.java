@@ -1,5 +1,6 @@
 package com.tiantianchat.repository;
 
+import com.tiantianchat.model.heartstone.dto.Weapon;
 import com.tiantianchat.model.heartstone.entity.WeaponEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,5 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface WeaponRepository extends JpaRepository<WeaponEntity, Integer> {
-    
+
+    WeaponEntity findByName(String name);
 }

@@ -1,9 +1,5 @@
 package com.tiantianchat.test;
 
-import com.tiantianchat.heartstone.character.Hero;
-
-import static com.tiantianchat.heartstone.InitGame.getHero;
-
 /**
  * @author Wangyl
  * @date 2019/7/10

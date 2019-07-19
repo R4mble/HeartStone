@@ -1,6 +1,5 @@
 package com.tiantianchat.model.heartstone.entity;
 
-import com.tiantianchat.model.heartstone.Card;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,4 +18,8 @@ public class WeaponEntity {
     private String name;
     private Integer attack;
     private Integer durability;
+
+    public Weapon toDTO() {
+        return new Weapon(name, attack, durability);
+    }
 }

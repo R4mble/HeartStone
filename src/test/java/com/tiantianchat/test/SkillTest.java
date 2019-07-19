@@ -1,6 +1,7 @@
 package com.tiantianchat.test;
 
 import com.tiantianchat.heartstone.exception.ManaLessException;
+import com.tiantianchat.heartstone.exception.ShamanTotemFullException;
 import com.tiantianchat.heartstone.skill.SkillInvoker;
 import com.tiantianchat.model.heartstone.dto.Minion;
 import com.tiantianchat.model.heartstone.dto.Profession;
@@ -90,56 +91,61 @@ public class SkillTest {
     public void testGeneTotem() {
         Profession shaman = pr.findByName("萨满").toDTO();
 
-        shaman.setCrystal(100);
+        shaman.setCrystal(10);
 
         skillInvoker.invoke(shaman);
         skillInvoker.invoke(shaman);
         skillInvoker.invoke(shaman);
         skillInvoker.invoke(shaman);
-        skillInvoker.invoke(shaman);
 
-        assert shaman.getCurCrystal() == 0;
+        try {
+            skillInvoker.invoke(shaman);
+        } catch (Exception e) {
+            assert e instanceof ShamanTotemFullException;
+        }
 
+        assert shaman.getCurCrystal() == 2;
         assert shaman.getScene().size() == 4;
     }
 
-//    @Test
-//    public void testHeal() {
-//        Profession mushi = pr.findByName("牧师");
-//        mushi.setCrystal(6);
-//
-//        Minion reporter = getMinion("报告兵");
-//        Profession paladin = pr.findByName("Paladin");
-//
-//        paladin.curBlood = (29);
-//        mushi.invokeSkill(paladin);
-//        assert paladin.curBlood == 30;
-//
-//        paladin.curBlood = (23);
-//        mushi.invokeSkill(paladin);
-//        assert paladin.curBlood == 25;
-//
-//        mushi.invokeSkill(reporter);
-//        assert reporter.curBlood == 1;
-//    }
-//
-//    @Test
-//    public void testShoot() {
-//        Profession hunter = pr.findByName("Hunter");
-//        Profession war = pr.findByName("战士");
-//
-//        war.setCrystal(3);
-//        war.invokeSkill();
-//
-//        hunter.setCrystal(7);
-//        hunter.invokeSkill(war);
-//        hunter.invokeSkill(war);
-//        hunter.invokeSkill(war);
-//
-//        assert war.getHealth() == 26;
-//        assert hunter.curCrystal == 1;
-//    }
-//
+    @Test
+    public void testHeal() {
+        Profession mushi = pr.findByName("牧师").toDTO();
+        mushi.setCrystal(8);
+
+        Minion reporter = mr.findByName("报告兵").toDTO();
+        Profession paladin = pr.findByName("圣骑士").toDTO();
+
+        paladin.setCurBlood(29);
+        skillInvoker.invoke(mushi, paladin);
+        skillInvoker.invoke(mushi, paladin);
+        assert paladin.getCurBlood() == 30;
+
+        paladin.setCurBlood(23);
+        skillInvoker.invoke(mushi, paladin);
+        assert paladin.getCurBlood() == 25;
+
+        skillInvoker.invoke(mushi, reporter);
+        assert reporter.getCurBlood() == 1;
+    }
+
+    @Test
+    public void testShoot() {
+        Profession hunter = pr.findByName("猎人").toDTO();
+        Profession war = pr.findByName("战士").toDTO();
+
+        war.setCrystal(3);
+        skillInvoker.invoke(war);
+
+        hunter.setCrystal(7);
+        skillInvoker.invoke(hunter, war);
+        skillInvoker.invoke(hunter, war);
+        skillInvoker.invoke(hunter, war);
+
+        assert war.getHealth() == 26;
+        assert hunter.getCurCrystal() == 1;
+    }
+
 //    @Test
 //    public void testDrawCard() {
 //        Profession shushi = pr.findByName("术士");

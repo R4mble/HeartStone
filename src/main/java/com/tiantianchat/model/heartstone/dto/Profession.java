@@ -17,6 +17,7 @@ import java.util.List;
 public class Profession implements GameCharacter {
     private String name;
     private String skill;
+    private Weapon weapon;
     private int attack;
     private int blood = 30;
     private int curBlood = 30;
