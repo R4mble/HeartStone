@@ -77,42 +77,7 @@ public class Hero extends Character {
         return curBlood + armor;
     }
 
-    public void invokeSkill() throws ManaLessException {
-        try {
-            Skill skill = new Skill();
-            Method method = skill.getClass().getMethod(this.skill, Hero.class);
-            ManaCost manaCost = method.getAnnotation(ManaCost.class);
 
-            if (curCrystal < manaCost.value()) {
-                throw new ManaLessException();
-            }
-
-            method.invoke(skill, this);
-
-            curCrystal = (curCrystal - manaCost.value());
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            System.out.println(e);
-        }
-    }
-
-    public void invokeSkill(Character character) throws ManaLessException {
-        try {
-            Skill skill = new Skill();
-            Method method = skill.getClass().getMethod(this.skill, Hero.class, Character.class);
-            ManaCost manaCost = method.getAnnotation(ManaCost.class);
-
-            if (curCrystal < manaCost.value()) {
-                throw new ManaLessException();
-            }
-
-            method.invoke(skill, this, character);
-
-            curCrystal = (curCrystal - manaCost.value());
-
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            System.out.println(e);
-        }
-    }
 
     // 释放技能
     public void castSpell(String spellName) throws ManaLessException {

@@ -13,7 +13,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-public class Weapon {
+public class Weapon implements Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
