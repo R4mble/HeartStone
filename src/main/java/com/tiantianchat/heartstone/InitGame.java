@@ -113,14 +113,4 @@ public class InitGame {
                 .orElse(null);
     }
 
-    private <T> T getObject(List<T> box) {
-        T t = box.stream()
-                .filter((T)p -> p.name.equals(minionName))
-                .findFirst()
-                .orElse(null);
-
-        Weapon r = new Weapon();
-        BeanUtils.copyProperties(m, r);
-        return r;
-    }
 }

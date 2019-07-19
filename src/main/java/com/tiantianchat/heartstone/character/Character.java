@@ -25,6 +25,7 @@ public class Character {
     public int curBlood;
 
     public String desc;
+    public String chineseName;
 
     @Override
     public boolean equals(Object c) {

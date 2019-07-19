@@ -83,8 +83,9 @@ public class SkillTest {
     public void testGeneTotem() {
         Hero shaman = getHero("萨满");
 
-        shaman.setCrystal(8);
+        shaman.setCrystal(10);
 
+        shaman.invokeSkill();
         shaman.invokeSkill();
         shaman.invokeSkill();
         shaman.invokeSkill();
