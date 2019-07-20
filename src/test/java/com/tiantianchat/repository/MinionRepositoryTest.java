@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 /**
- * @author Wangyl
- * @date 2019/7/19
+ *
+ *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

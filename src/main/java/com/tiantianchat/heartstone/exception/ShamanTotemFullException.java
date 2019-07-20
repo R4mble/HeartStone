@@ -1,8 +1,8 @@
 package com.tiantianchat.heartstone.exception;
 
 /**
- * @author Wangyl
- * @date 2019/7/10
+ *
+ *
  */
 public class ShamanTotemFullException extends RuntimeException {
 

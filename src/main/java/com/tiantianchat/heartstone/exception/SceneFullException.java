@@ -1,7 +1,7 @@
 package com.tiantianchat.heartstone.exception;
 
 /**
- * @author Ramble
+ *
  */
 public class SceneFullException extends RuntimeException {
 

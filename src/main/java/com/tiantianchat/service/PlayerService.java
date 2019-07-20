@@ -1,11 +1,11 @@
 package com.tiantianchat.service;
 
-import com.tiantianchat.model.heartstone.entity.PlayerEntity;
+import com.tiantianchat.heartstone.model.entity.PlayerEntity;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Wangyl
- * @date 2019/7/17
+ *
+ *
  */
 @Service
 public class PlayerService {

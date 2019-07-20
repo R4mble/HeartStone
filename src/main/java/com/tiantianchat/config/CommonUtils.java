@@ -1,6 +1,6 @@
 package com.tiantianchat.config;
 
-import com.tiantianchat.model.heartstone.entity.PlayerEntity;
+import com.tiantianchat.heartstone.model.entity.PlayerEntity;
 import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.Cookie;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.regex.Pattern;
 
 /**
- * @author Ramble
+ *
  */
 public class CommonUtils {
 

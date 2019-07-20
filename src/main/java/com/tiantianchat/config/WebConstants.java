@@ -1,7 +1,7 @@
 package com.tiantianchat.config;
 
 /**
- * @author Ramble
+ *
  */
 public class WebConstants {
 

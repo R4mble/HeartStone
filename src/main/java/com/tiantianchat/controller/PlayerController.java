@@ -3,7 +3,7 @@ package com.tiantianchat.controller;
 import com.tiantianchat.config.CommonUtils;
 import com.tiantianchat.config.JwtService;
 import com.tiantianchat.config.WebConstants;
-import com.tiantianchat.model.heartstone.entity.PlayerEntity;
+import com.tiantianchat.heartstone.model.entity.PlayerEntity;
 import com.tiantianchat.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Wangyl
- * @date 2019/7/17
+ *
+ *
  */
 @RestController
 @RequestMapping("/player")

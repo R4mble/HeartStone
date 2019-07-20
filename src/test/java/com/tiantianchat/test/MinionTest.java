@@ -1,11 +1,11 @@
 package com.tiantianchat.test;
 
-import com.tiantianchat.heartstone.skill.CardDrawer;
-import com.tiantianchat.heartstone.skill.MinionCommander;
-import com.tiantianchat.heartstone.skill.SkillInvoker;
-import com.tiantianchat.model.heartstone.Card;
-import com.tiantianchat.model.heartstone.dto.Minion;
-import com.tiantianchat.model.heartstone.dto.Profession;
+import com.tiantianchat.heartstone.invoker.CardDrawer;
+import com.tiantianchat.heartstone.invoker.MinionCommander;
+import com.tiantianchat.heartstone.invoker.SkillInvoker;
+import com.tiantianchat.heartstone.model.Card;
+import com.tiantianchat.heartstone.model.dto.Minion;
+import com.tiantianchat.heartstone.model.dto.Profession;
 import com.tiantianchat.repository.MinionRepository;
 import com.tiantianchat.repository.ProfessionRepository;
 import com.tiantianchat.repository.WeaponRepository;
@@ -21,8 +21,8 @@ import java.util.List;
 
 
 /**
- * @author Wangyl
- * @date 2019/7/11
+ *
+ *
  */
 
 @RunWith(SpringRunner.class)

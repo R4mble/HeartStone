@@ -1,18 +1,15 @@
 package com.tiantianchat.config;
 
-import com.tiantianchat.model.heartstone.entity.PlayerEntity;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
+import com.tiantianchat.heartstone.model.entity.PlayerEntity;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Optional;
 
 /**
- * @author Ramble
+ *
  */
 @Service
 public class JwtService {
@@ -31,13 +28,12 @@ public class JwtService {
                 .compact();
     }
 
-    public Optional<String> getSubFromToken(String token) {
-        try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-            return Optional.ofNullable(claimsJws.getBody().getSubject());
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+    public String getSubFromToken(String token) {
+        return Jwts.parser().
+                setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
     private Date expireTimeFromNow() {
