@@ -1,6 +1,7 @@
 package com.tiantianchat.test;
 
 import com.tiantianchat.heartstone.invoker.CardDrawer;
+import com.tiantianchat.heartstone.invoker.CardExecutor;
 import com.tiantianchat.heartstone.invoker.MinionCommander;
 import com.tiantianchat.heartstone.invoker.SkillInvoker;
 import com.tiantianchat.heartstone.model.Card;
@@ -45,7 +46,7 @@ public class MinionTest {
     private CardDrawer cardDrawer;
 
     @Autowired
-    private MinionCommander mc;
+    private CardExecutor cardExecutor;
 
     @Test
     public void basic() {
@@ -80,7 +81,9 @@ public class MinionTest {
         shaman.getHandCard().add(m);
 
         shaman.setCrystal(4);
-        mc.sendMinion(shaman, m, fashi);
+
+
+        cardExecutor.exec(shaman, "精灵弓箭手", fashi);
 
         assert fashi.getCurBlood() == 29;
     }

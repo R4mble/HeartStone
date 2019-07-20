@@ -1,5 +1,7 @@
 package com.tiantianchat.heartstone.model.entity;
 
+import com.tiantianchat.heartstone.model.dto.Spell;
+import com.tiantianchat.heartstone.model.dto.Weapon;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,4 +20,9 @@ public class SpellEntity {
     private String name;
     private Integer cost;
     private String profession;
+    private String desc;
+
+    public Spell toDTO() {
+        return new Spell(name, cost, desc);
+    }
 }

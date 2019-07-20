@@ -8,6 +8,7 @@ import com.tiantianchat.heartstone.model.Card;
 import com.tiantianchat.heartstone.model.dto.Profession;
 import com.tiantianchat.repository.MinionRepository;
 import com.tiantianchat.repository.ProfessionRepository;
+import com.tiantianchat.repository.SpellRepository;
 import com.tiantianchat.repository.WeaponRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,10 +43,13 @@ public class BattleTest {
     private WeaponRepository wr;
 
     @Autowired
+    private SpellRepository sr;
+
+    @Autowired
     private CardDrawer cd;
 
     @Autowired
-    private CardExecutor ce;
+    private CardExecutor cardExecutor;
 
     @Autowired
     private MinionCommander mc;
@@ -91,11 +95,17 @@ public class BattleTest {
         Profession shengqishi = pr.findByName("圣骑士").toDTO();
 
         fashi.getHandCard().add(mr.findByName("巫医").toDTO());
+        fashi.getHandCard().add(sr.findByName("幸运币").toDTO());
 
         shengqishi.setCurBlood(23);
         fashi.setCrystal(3);
 
-        ce.exec(fashi, mr.findByName("巫医").toDTO(), shengqishi);
+        cardExecutor.exec(fashi, "巫医", shengqishi);
+
+        cardExecutor.exec(fashi, "幸运币");
+
+        assert fashi.getCurCrystal() == 3;
+
 
         assert shengqishi.getCurBlood() == 25;
     }

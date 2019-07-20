@@ -2,11 +2,13 @@ package com.tiantianchat.heartstone.invoker;
 
 import com.tiantianchat.heartstone.constant.Consts;
 import com.tiantianchat.heartstone.exception.ManaLessException;
-import com.tiantianchat.heartstone.exception.MinionNotFoundException;
+import com.tiantianchat.heartstone.exception.CardNotFoundException;
 import com.tiantianchat.heartstone.exception.SceneFullException;
 import com.tiantianchat.heartstone.model.GameCharacter;
 import com.tiantianchat.heartstone.model.dto.Minion;
 import com.tiantianchat.heartstone.model.dto.Profession;
+import com.tiantianchat.repository.MinionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,17 +17,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class MinionCommander {
 
+    @Autowired
+    private MinionRepository mr;
+
     // 不需要指定目标的随从
-    public void sendMinion(Profession src, Minion minion) {
+    public void sendMinion(Profession src, String minionName) {
+
+        Minion minion = mr.findByName(minionName).toDTO();
+
         if (src.getCurCrystal() < minion.getCost()) {
             throw new ManaLessException();
         }
 
         if (!src.getHandCard().contains(minion)) {
-            throw new MinionNotFoundException();
+            throw new CardNotFoundException();
         }
 
-        if (src.getScene().size() >= 7) {
+        if (src.getScene().size() >= Consts.MAX_SCENE) {
             throw new SceneFullException();
         }
 
@@ -35,13 +43,16 @@ public class MinionCommander {
     }
 
     // 需要指定一个目标的随从
-    public void sendMinion(Profession src, Minion minion, GameCharacter tar) {
+    public void sendMinion(Profession src, String minionName, GameCharacter tar) {
+
+        Minion minion = mr.findByName(minionName).toDTO();
+
         if (src.getCurCrystal() < minion.getCost()) {
             throw new ManaLessException();
         }
 
         if (!src.getHandCard().contains(minion)) {
-            throw new MinionNotFoundException();
+            throw new CardNotFoundException();
         }
 
         if (src.getScene().size() >= Consts.MAX_SCENE) {

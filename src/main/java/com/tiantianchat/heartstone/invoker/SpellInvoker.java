@@ -1,13 +1,13 @@
 package com.tiantianchat.heartstone.invoker;
 
 import com.tiantianchat.heartstone.exception.ManaLessException;
+import com.tiantianchat.heartstone.exception.CardNotFoundException;
 import com.tiantianchat.heartstone.model.GameCharacter;
 import com.tiantianchat.heartstone.model.dto.Profession;
+import com.tiantianchat.heartstone.model.dto.Spell;
+import com.tiantianchat.repository.SpellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * 法术释放器
@@ -15,50 +15,34 @@ import java.lang.reflect.Method;
 @Component
 public class SpellInvoker {
 
-    private final Spells spell;
-
     @Autowired
-    public SpellInvoker(Spells spell) {
-        this.spell = spell;
-    }
+    private SpellRepository sr;
+
 
     // 不需要指定目标的法术
-    public void invoke(Profession src, String spellName) throws ManaLessException {
+    public void invoke(Profession src, String spellName)  {
 
-        try {
-            Method method = spell.getClass().getMethod(spellName, Profession.class);
+        Spell spell = sr.findByName(spellName).toDTO();
 
-            ManaCost manaCost = method.getAnnotation(ManaCost.class);
-
-            if (src.getCurCrystal() < manaCost.value()) {
-                throw new ManaLessException();
-            }
-
-            method.invoke(spell, src);
-
-            src.setCurCrystal(src.getCurCrystal() - manaCost.value());
-
-        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            System.out.println(e);
+        if (src.getCurCrystal() < spell.getCost()) {
+            throw new ManaLessException();
         }
+
+        if (!src.getHandCard().contains(spell)) {
+            throw new CardNotFoundException();
+        }
+
+        if (spell.getDesc().startsWith("addCurCrystal")) {
+            src.setCurCrystal(src.getCurCrystal() + Integer.parseInt(spell.getDesc().substring("addCurCrystal".length())));
+        }
+
+
+        src.getHandCard().remove(spell);
+        src.setCurCrystal(src.getCurCrystal() - spell.getCost());
     }
 
     // 需要指定一个目标的法术
-    public void invoke(Profession src, String spellName, GameCharacter tar) throws ManaLessException {
-        try {
-            Method method = spell.getClass().getMethod(spellName, GameCharacter.class);
-            ManaCost manaCost = method.getAnnotation(ManaCost.class);
+    public void invoke(Profession src, String spellName, GameCharacter tar) {
 
-            if (src.getCurCrystal() < manaCost.value()) {
-                throw new ManaLessException();
-            }
-
-            method.invoke(spell, tar);
-
-            src.setCurCrystal(src.getCurCrystal() - manaCost.value());
-
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            System.out.println(e);
-        }
     }
 }
