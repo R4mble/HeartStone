@@ -1,9 +1,10 @@
 # HeartStone
 Game HeartStone.
 
-WIP
-
-add vm options "-ea" to enable assert
-
-
+-[x] 9 profession Skill
+-[ ] Spell
+    -[ ] Hurt
+    -[ ] Heal  
+-[ ] Minion
+    
 

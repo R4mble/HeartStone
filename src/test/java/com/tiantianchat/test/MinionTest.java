@@ -83,7 +83,7 @@ public class MinionTest {
         shaman.setCrystal(4);
 
 
-        cardExecutor.exec(shaman, "精灵弓箭手", fashi);
+        cardExecutor.exec(shaman, m, fashi);
 
         assert fashi.getCurBlood() == 29;
     }

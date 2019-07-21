@@ -9,6 +9,7 @@ import com.tiantianchat.heartstone.model.dto.Minion;
 import com.tiantianchat.heartstone.model.dto.Profession;
 import com.tiantianchat.repository.MinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,32 +21,7 @@ public class MinionCommander {
     @Autowired
     private MinionRepository mr;
 
-    // 不需要指定目标的随从
-    public void sendMinion(Profession src, String minionName) {
-
-        Minion minion = mr.findByName(minionName).toDTO();
-
-        if (src.getCurCrystal() < minion.getCost()) {
-            throw new ManaLessException();
-        }
-
-        if (!src.getHandCard().contains(minion)) {
-            throw new CardNotFoundException();
-        }
-
-        if (src.getScene().size() >= Consts.MAX_SCENE) {
-            throw new SceneFullException();
-        }
-
-        src.getHandCard().remove(minion);
-        src.getScene().add(minion);
-        src.setCurCrystal(src.getCurCrystal() - minion.getCost());
-    }
-
-    // 需要指定一个目标的随从
-    public void sendMinion(Profession src, String minionName, GameCharacter tar) {
-
-        Minion minion = mr.findByName(minionName).toDTO();
+    public void send(Profession src, Minion minion, @Nullable GameCharacter tar) {
 
         if (src.getCurCrystal() < minion.getCost()) {
             throw new ManaLessException();

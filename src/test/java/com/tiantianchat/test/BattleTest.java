@@ -5,7 +5,9 @@ import com.tiantianchat.heartstone.invoker.CardExecutor;
 import com.tiantianchat.heartstone.invoker.MinionCommander;
 import com.tiantianchat.heartstone.invoker.SkillInvoker;
 import com.tiantianchat.heartstone.model.Card;
+import com.tiantianchat.heartstone.model.dto.Minion;
 import com.tiantianchat.heartstone.model.dto.Profession;
+import com.tiantianchat.heartstone.model.dto.Spell;
 import com.tiantianchat.repository.MinionRepository;
 import com.tiantianchat.repository.ProfessionRepository;
 import com.tiantianchat.repository.SpellRepository;
@@ -68,25 +70,20 @@ public class BattleTest {
                 mr.findByName("食人魔法师").toDTO(),mr.findByName("古拉巴什狂暴者").toDTO(),
                 mr.findByName("暗鳞治愈者").toDTO(),mr.findByName("霜狼督军").toDTO());
 
-        List<Card> cardList = new ArrayList<>();
+        List<Card> cards1 = new ArrayList<>(cards);
+        List<Card> cards2 = new ArrayList<>(cards);
 
-        for (Card c : cards) {
-            cardList.add(c);
-            cardList.add(c);
-        }
 
-        List<Card> cards2 = new ArrayList<>(cardList);
+        Card a = cards1.get(0);
+        Card b = cards2.get(0);
 
-        fashi.setCardLibrary(cardList);
+        fashi.setCardLibrary(cards1);
         shengqishi.setCardLibrary(cards2);
 
-        cd.draw(fashi, 4);
-        cd.draw(shengqishi, 4);
+        System.out.println(fashi.getCardLibrary());
 
-        assert fashi.getHandCard().size() == 4;
-        assert shengqishi.getHandCard().size() == 4;
-        assert fashi.getCardLibrary().size() == 26;
-        assert shengqishi.getCardLibrary().size() == 26;
+        cd.draw(fashi, 3);
+        cd.draw(shengqishi, 4);
     }
 
     @Test
@@ -94,20 +91,26 @@ public class BattleTest {
         Profession fashi = pr.findByName("法师").toDTO();
         Profession shengqishi = pr.findByName("圣骑士").toDTO();
 
-        fashi.getHandCard().add(mr.findByName("巫医").toDTO());
-        fashi.getHandCard().add(sr.findByName("幸运币").toDTO());
+        Minion wuyi = mr.findByName("巫医").toDTO();
+        Spell luckCoin = sr.findByName("幸运币").toDTO();
+
+        fashi.getHandCard().add(wuyi);
+        fashi.getHandCard().add(luckCoin);
 
         shengqishi.setCurBlood(23);
         fashi.setCrystal(3);
 
-        cardExecutor.exec(fashi, "巫医", shengqishi);
-
-        cardExecutor.exec(fashi, "幸运币");
+        // 法师使用巫医
+        cardExecutor.exec(fashi, wuyi, shengqishi);
+        // 法师使用幸运币
+        cardExecutor.exec(fashi, luckCoin, null);
 
         assert fashi.getCurCrystal() == 3;
 
-
         assert shengqishi.getCurBlood() == 25;
+
+        shengqishi.setCrystal(10);
+
     }
 
 }
