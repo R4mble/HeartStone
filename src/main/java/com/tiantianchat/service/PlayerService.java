@@ -1,6 +1,8 @@
 package com.tiantianchat.service;
 
 import com.tiantianchat.heartstone.model.entity.PlayerEntity;
+import com.tiantianchat.repository.PlayerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,7 +11,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PlayerService {
-    public boolean createUser(String email, String password, String password1) {
+
+    @Autowired
+    private PlayerRepository playerRepository;
+
+    public boolean createUser(String name, String email, String password) {
         return false;
     }
 
