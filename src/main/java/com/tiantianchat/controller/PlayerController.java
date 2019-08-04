@@ -3,6 +3,7 @@ package com.tiantianchat.controller;
 import com.tiantianchat.config.CommonUtils;
 import com.tiantianchat.config.JwtService;
 import com.tiantianchat.config.WebConstants;
+import com.tiantianchat.controller.param.RegisterParam;
 import com.tiantianchat.heartstone.model.entity.PlayerEntity;
 import com.tiantianchat.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,9 @@ public class PlayerController {
     private JwtService jwtService;
 
     @PostMapping("/users")
-    public ResponseEntity createUser(@Valid @RequestBody PlayerEntity user) {
-        boolean res =  userService.createUser(user.getEmail(), user.getPassword(), user.getPassword());
+    public ResponseEntity createUser(@Valid @RequestBody RegisterParam registerParam) {
+
+        boolean res =  userService.createUser(registerParam.getName(), registerParam.getEmail(), registerParam.getPassword());
         if (res) {
             return ResponseEntity.ok("注册成功");
         }
