@@ -20,8 +20,4 @@ public class PlayerEntity {
     private String email;
     private String password;
     private Integer goldCoin;
-    @ElementCollection
-    private Map<String, Integer> heroExperience;
-    private PlayerEntity[] friends;
-    private PlayerEntity[] blocks;
 }
