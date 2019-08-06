@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -111,6 +112,7 @@ public class BattleTest {
 
         shengqishi.setCrystal(10);
 
+        HashMap
     }
 
 }
